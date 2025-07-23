@@ -7,21 +7,24 @@ import Portfolio from './components/Portfolio';
 import Blog from './components/Blog';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import { ThemeProvider } from './context/ThemeContext';
 
 function App() {
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
-      <main>
-        <Hero />
-        <About />
-        <Services />
-        <Portfolio />
-        <Blog />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <ThemeProvider>
+      <div className="min-h-screen bg-white dark:bg-black">
+        <Header />
+        <main>
+          <Hero />
+          <About />
+          <Services />
+          <Portfolio />
+          <Blog />
+          <Contact />
+        </main>
+        <Footer />
+      </div>
+    </ThemeProvider>
   );
 }
 

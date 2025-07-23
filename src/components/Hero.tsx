@@ -35,6 +35,13 @@ const Hero = () => {
     }
   };
 
+  const scrollToPortfolio = () => {
+    const element = document.getElementById('portfolio');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const techIcons = [
     { Icon: Code, color: '#f15a22' },
     { Icon: Cloud, color: '#6366f1' },
@@ -59,7 +66,7 @@ const Hero = () => {
   }
 
   // Helper to check if a new icon/snippet is too close to existing ones
-  function isTooClose(top: number, left: number, arr: {top: number, left: number, Icon?: any, code?: string}[], typeKey: string, typeValue: any) {
+  function isTooClose<T extends { [key: string]: any }>(top: number, left: number, arr: T[], typeKey: keyof T, typeValue: any) {
     return arr.some(item => {
       const dist = Math.sqrt(Math.pow(item.top - top, 2) + Math.pow(item.left - left, 2));
       const sameType = item[typeKey] === typeValue;
@@ -174,7 +181,7 @@ const Hero = () => {
   }, [typedSnippets]);
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 dark:from-black dark:via-gray-900 dark:to-gray-900 px-2 sm:px-4 pt-28 sm:pt-32">
       {/* Animated Tech Icons Background (dynamic) */}
       <div className="absolute inset-0 w-full h-full z-0 pointer-events-none select-none">
         {floatingIcons.map(icon => (
@@ -227,24 +234,24 @@ const Hero = () => {
         </filter>
       </svg>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-20 sm:mt-28">
+      <div className="relative z-10 max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 text-center mt-0 sm:mt-10 md:mt-20">
         <div className={`transition-all duration-1200 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'}`}>
           {/* Badge */}
-          <div className={`inline-flex items-center space-x-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-xs sm:text-sm font-medium mb-8 transition-all duration-800 delay-200 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+          <div className={`inline-flex items-center space-x-2 bg-blue-100 text-blue-800 dark:bg-gray-800 dark:text-blue-300 px-4 py-2 rounded-full text-xs sm:text-sm font-medium mb-8 mt-2 sm:mt-4 transition-all duration-800 delay-200 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
             <Sparkles className="h-4 w-4" />
             <span>Leading IT Solutions & Automation</span>
           </div>
 
           {/* Main Heading */}
-          <h1 className={`text-3xl xs:text-4xl sm:text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <h1 className={`text-5xl xs:text-6xl sm:text-7xl md:text-8xl font-bold text-gray-900 dark:text-white mb-6 leading-tight transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             Transform Your Business with
-            <span className={`block bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent transition-all duration-1200 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <span className={`block bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent dark:from-blue-400 dark:via-purple-400 dark:to-blue-600 transition-all duration-1200 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               CodeBlend Solutions
             </span>
           </h1>
 
           {/* Subheading */}
-          <p className={`text-base sm:text-xl md:text-2xl text-gray-600 mb-8 sm:mb-12 max-w-xl sm:max-w-4xl mx-auto leading-relaxed transition-all duration-1000 delay-800 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <p className={`text-base sm:text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 sm:mb-12 max-w-xl sm:max-w-4xl mx-auto leading-relaxed transition-all duration-1000 delay-800 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             We specialize in SaaS development, automation workflows, and full-stack applications 
             that drive growth and efficiency for businesses of all sizes.
           </p>
@@ -257,13 +264,13 @@ const Hero = () => {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="relative z-10 flex items-center space-x-2">
-              <span>Start Your Project</span>
+              <span>Start Your Journey</span>
               <ArrowRight className="h-5 w-5 group-hover:translate-x-2 transition-transform duration-300" />
               </div>
             </button>
             
-            <button className="w-full sm:w-auto border-2 border-gray-300 text-gray-700 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:border-blue-600 hover:text-blue-600 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group">
-              <div className="absolute inset-0 bg-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <button onClick={scrollToPortfolio} className="w-full sm:w-auto bg-white dark:bg-gray-900 border-2 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-200 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:border-blue-600 hover:text-blue-600 dark:hover:text-blue-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group">
+              <div className="absolute inset-0 bg-blue-50 dark:bg-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <span className="relative z-10">
               View Our Work
               </span>
@@ -271,7 +278,7 @@ const Hero = () => {
           </div>
 
           {/* Feature Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 max-w-2xl sm:max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10 max-w-2xl sm:max-w-4xl mx-auto mt-12 mb-16">
             {[
               { icon: Zap, title: 'Automation', desc: 'Streamline workflows and boost productivity' },
               { icon: Globe, title: 'SaaS Solutions', desc: 'Scalable software for modern businesses' },
@@ -279,14 +286,11 @@ const Hero = () => {
             ].map((feature, index) => (
               <div 
                 key={index}
-                className={`bg-white/80 backdrop-blur-sm p-5 sm:p-6 rounded-xl shadow-lg hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-500 hover:-translate-y-3 hover:scale-105 group cursor-pointer ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-                }`}
-                style={{ transitionDelay: `${index * 200 + 1200}ms` }}
+                className={`bg-blue-50 dark:bg-gray-900/80 backdrop-blur-sm p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-200 hover:-translate-y-3 hover:scale-105 group cursor-pointer border border-blue-100 dark:border-gray-800`}
               >
-                <feature.icon className="h-8 w-8 text-blue-600 mb-4 mx-auto group-hover:scale-110 group-hover:text-purple-600 transition-all duration-300" />
-                <h3 className="font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">{feature.title}</h3>
-                <p className="text-gray-600 text-xs sm:text-sm group-hover:text-gray-700 transition-colors duration-300">{feature.desc}</p>
+                <feature.icon className="h-8 w-8 text-blue-600 dark:text-blue-400 mb-4 mx-auto group-hover:scale-110 group-hover:text-purple-600 transition-all duration-300" />
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">{feature.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors duration-300">{feature.desc}</p>
               </div>
             ))}
           </div>
@@ -295,8 +299,8 @@ const Hero = () => {
 
       {/* Scroll Indicator */}
       <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce transition-all duration-1000 delay-1500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center hover:border-blue-500 transition-colors duration-300 cursor-pointer">
-          <div className="w-1 h-3 bg-gray-400 rounded-full mt-2 animate-pulse hover:bg-blue-500 transition-colors duration-300"></div>
+        <div className="w-6 h-10 border-2 border-gray-400 dark:border-gray-600 rounded-full flex justify-center hover:border-blue-500 dark:hover:border-blue-400 transition-colors duration-300 cursor-pointer">
+          <div className="w-1 h-3 bg-gray-400 dark:bg-gray-600 rounded-full mt-2 animate-pulse hover:bg-blue-500 dark:hover:bg-blue-400 transition-colors duration-300"></div>
         </div>
       </div>
     </section>
