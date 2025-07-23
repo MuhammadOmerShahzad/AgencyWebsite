@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Target, Eye, Heart, Users, Award, TrendingUp, Database, Cloud, Smartphone, Code, Cpu, Palette, Server, CloudCog, Brain, PenTool, Zap, ClipboardList, LayoutGrid, Slack, ShoppingCart, Workflow } from 'lucide-react';
-
+//About Section
 const About = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [counters, setCounters] = useState({ clients: 0, projects: 0, success: 0 });
   const sectionRef = useRef<HTMLDivElement>(null);
+
 
   useEffect(() => {
     const observer = new IntersectionObserver(
