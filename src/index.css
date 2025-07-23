@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes pop {
+  0%, 100% { transform: scale(0.9) translateY(0); opacity: 0.5; }
+  50% { transform: scale(1.15) translateY(-12px); opacity: 0.8; }
+}
+.animate-pop1 { animation: pop 4s ease-in-out infinite; animation-delay: 0s; }
+.animate-pop2 { animation: pop 5s ease-in-out infinite; animation-delay: 1s; }
+.animate-pop3 { animation: pop 4.5s ease-in-out infinite; animation-delay: 2s; }
+.animate-pop4 { animation: pop 6s ease-in-out infinite; animation-delay: 0.5s; }
+.animate-pop5 { animation: pop 5.5s ease-in-out infinite; animation-delay: 1.5s; }
+.animate-pop6 { animation: pop 4.2s ease-in-out infinite; animation-delay: 2.5s; }
+.animate-pop7 { animation: pop 5.2s ease-in-out infinite; animation-delay: 0.8s; }
+.animate-pop8 { animation: pop 6.2s ease-in-out infinite; animation-delay: 1.2s; }
+.animate-pop9 { animation: pop 5.8s ease-in-out infinite; animation-delay: 2.2s; }
