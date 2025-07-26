@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Cloud, Zap, Code, Palette, Settings, ArrowRight, X, CheckCircle, Clock, Users, Shield, TrendingUp, Database, Smartphone, Globe, BarChart3 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface Service {
   id: string;
@@ -19,7 +20,6 @@ const Services = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isModalAnimating, setIsModalAnimating] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -230,17 +230,13 @@ const Services = () => {
   const openModal = (service: Service) => {
     setSelectedService(service);
     setIsModalOpen(true);
-    setIsModalAnimating(true);
     document.body.style.overflow = 'hidden';
   };
 
   const closeModal = () => {
-    setIsModalAnimating(false);
-    setTimeout(() => {
-      setIsModalOpen(false);
-      setSelectedService(null);
-      document.body.style.overflow = 'unset';
-    }, 300);
+    setIsModalOpen(false);
+    setSelectedService(null);
+    document.body.style.overflow = 'unset';
   };
 
   const handleConsultation = () => {
@@ -254,6 +250,87 @@ const Services = () => {
         });
       }
     }, 400);
+  };
+
+  // Animation variants
+  const backdropVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { duration: 0.3, ease: "easeOut" }
+    },
+    exit: { 
+      opacity: 0,
+      transition: { duration: 0.2, ease: "easeIn" }
+    }
+  };
+
+  const modalVariants = {
+    hidden: { 
+      scale: 0.3,
+      opacity: 0,
+      rotateX: -15,
+      rotateY: 15,
+      y: 100
+    },
+    visible: { 
+      scale: 1,
+      opacity: 1,
+      rotateX: 0,
+      rotateY: 0,
+      y: 0,
+      transition: {
+        type: "spring",
+        damping: 25,
+        stiffness: 300,
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    },
+    exit: { 
+      scale: 0.8,
+      opacity: 0,
+      rotateX: 15,
+      rotateY: -15,
+      y: -50,
+      transition: {
+        duration: 0.3,
+        ease: "easeIn"
+      }
+    }
+  };
+
+  const contentVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        delay: 0.2,
+        duration: 0.4,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const staggerItem = {
+    hidden: { opacity: 0, x: -20 },
+    visible: { 
+      opacity: 1, 
+      x: 0,
+      transition: { duration: 0.3, ease: "easeOut" }
+    }
   };
 
   return (
@@ -325,211 +402,239 @@ const Services = () => {
       </section>
 
       {/* Service Detail Modal */}
-      {isModalOpen && selectedService && (
-        <div className={`fixed inset-0 z-50 overflow-y-auto transition-all duration-500 ease-out ${
-          isModalAnimating ? 'opacity-100' : 'opacity-0'
-        }`}>
-          <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-            {/* Backdrop with animation */}
-            <div 
-              className={`fixed inset-0 transition-all duration-500 ease-out ${
-                isModalAnimating 
-                  ? 'bg-gray-900/75 backdrop-blur-sm' 
-                  : 'bg-gray-900/0 backdrop-blur-none'
-              }`} 
-              onClick={closeModal}
-            ></div>
-            
-            {/* Modal with smooth animations */}
-            <div 
-              className={`inline-block w-full max-w-6xl p-6 my-8 overflow-hidden text-left align-middle transition-all duration-500 ease-out transform ${
-                isModalAnimating 
-                  ? 'bg-white dark:bg-gray-900 shadow-2xl rounded-2xl scale-100 opacity-100 translate-y-0 rotate-0' 
-                  : 'bg-white dark:bg-gray-900 shadow-2xl rounded-2xl scale-90 opacity-0 translate-y-8 -rotate-1'
-              }`}
-              style={{
-                transformOrigin: 'center center',
-                filter: isModalAnimating ? 'blur(0px)' : 'blur(2px)'
-              }}
-            >
-              <div className="relative">
-                {/* Close Button */}
-                <button
-                  onClick={closeModal}
-                  className={`absolute top-0 right-0 z-10 p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-all duration-300 hover:scale-110 hover:rotate-90 ${
-                    isModalAnimating ? 'opacity-100 translate-x-0 translate-y-0' : 'opacity-0 translate-x-2 -translate-y-2'
-                  }`}
-                  style={{ transitionDelay: isModalAnimating ? '300ms' : '0ms' }}
+      <AnimatePresence>
+        {isModalOpen && selectedService && (
+          <motion.div 
+            className="fixed inset-0 z-50 overflow-y-auto"
+            variants={backdropVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+              {/* Backdrop */}
+              <motion.div 
+                className="fixed inset-0 bg-gray-900/80 backdrop-blur-sm" 
+                onClick={closeModal}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              />
+              
+              {/* Modal */}
+              <motion.div 
+                className="inline-block w-full max-w-7xl my-8 overflow-hidden text-left align-middle bg-white dark:bg-gray-900 shadow-2xl rounded-3xl"
+                variants={modalVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                style={{ perspective: 1000 }}
+              >
+                <motion.div 
+                  className="relative"
+                  variants={contentVariants}
+                  initial="hidden"
+                  animate="visible"
                 >
-                  <X className="h-6 w-6" />
-                </button>
+                  {/* Close Button */}
+                  <button
+                    onClick={closeModal}
+                    className="absolute top-6 right-6 z-10 p-3 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-all duration-300 hover:scale-110 hover:rotate-90 bg-gray-100 dark:bg-gray-800 rounded-full"
+                  >
+                    <X className="h-6 w-6" />
+                  </button>
 
-                {/* Modal Content */}
-                <div className="max-h-[80vh] overflow-y-auto pr-4 custom-scrollbar">
-                  {/* Header with animation */}
-                  <div className={`flex items-center mb-8 transition-all duration-700 ease-out ${
-                    isModalAnimating ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95'
-                  }`}>
-                    <div className={`w-20 h-20 bg-gradient-to-r ${selectedService.gradient} rounded-2xl flex items-center justify-center mr-6 transition-all duration-800 ease-out ${
-                      isModalAnimating ? 'scale-100 rotate-0 opacity-100' : 'scale-75 rotate-45 opacity-0'
-                    }`}>
-                      <selectedService.icon className={`h-10 w-10 text-white transition-all duration-600 ease-out ${
-                        isModalAnimating ? 'scale-100 rotate-0' : 'scale-75 rotate-180'
-                      }`} />
-                    </div>
-                    <div>
-                      <h2 className={`text-4xl font-bold text-gray-900 dark:text-white mb-2 transition-all duration-600 ease-out ${
-                        isModalAnimating ? 'opacity-100 translate-y-0 translate-x-0' : 'opacity-0 translate-y-4 -translate-x-4'
-                      }`}>{selectedService.title}</h2>
-                      <p className={`text-xl text-gray-600 dark:text-gray-300 transition-all duration-700 ease-out ${
-                        isModalAnimating ? 'opacity-100 translate-y-0 translate-x-0' : 'opacity-0 translate-y-4 -translate-x-4'
-                      }`}>{selectedService.description}</p>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    {/* Left Column */}
-                    <div className="space-y-8">
-                      {/* Features */}
-                      <div className={`transition-all duration-600 ease-out ${
-                        isModalAnimating ? 'opacity-100 translate-y-0 translate-x-0' : 'opacity-0 translate-y-6 -translate-x-8'
-                      }`}>
-                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-                          <CheckCircle className={`h-6 w-6 text-blue-600 mr-2 transition-all duration-500 ${
-                            isModalAnimating ? 'scale-100 rotate-0' : 'scale-0 rotate-180'
-                          }`} />
-                          Key Features
-                        </h3>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                          {selectedService.features.map((feature, index) => (
-                            <div key={index} className={`flex items-center text-gray-700 dark:text-gray-300 transition-all duration-500 ease-out ${
-                              isModalAnimating ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
-                            }`} style={{ transitionDelay: isModalAnimating ? `${200 + index * 50}ms` : '0ms' }}>
-                              <div className={`w-2 h-2 bg-blue-500 rounded-full mr-3 transition-all duration-400 ${
-                                isModalAnimating ? 'scale-100' : 'scale-0'
-                              }`} style={{ transitionDelay: isModalAnimating ? `${300 + index * 50}ms` : '0ms' }}></div>
-                              {feature}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Benefits */}
-                      <div className={`transition-all duration-700 ease-out ${
-                        isModalAnimating ? 'opacity-100 translate-y-0 translate-x-0' : 'opacity-0 translate-y-6 -translate-x-8'
-                      }`}>
-                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-                          <TrendingUp className={`h-6 w-6 text-green-600 mr-2 transition-all duration-500 ${
-                            isModalAnimating ? 'scale-100 rotate-0' : 'scale-0 rotate-180'
-                          }`} />
-                          Business Benefits
-                        </h3>
-                        <ul className="space-y-3">
-                          {selectedService.benefits.map((benefit, index) => (
-                            <li key={index} className={`flex items-start text-gray-700 dark:text-gray-300 transition-all duration-500 ease-out ${
-                              isModalAnimating ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
-                            }`} style={{ transitionDelay: isModalAnimating ? `${400 + index * 60}ms` : '0ms' }}>
-                              <div className={`w-2 h-2 bg-green-500 rounded-full mr-3 mt-2 flex-shrink-0 transition-all duration-400 ${
-                                isModalAnimating ? 'scale-100' : 'scale-0'
-                              }`} style={{ transitionDelay: isModalAnimating ? `${500 + index * 60}ms` : '0ms' }}></div>
-                              {benefit}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {/* Technologies */}
-                      <div className={`transition-all duration-800 ease-out ${
-                        isModalAnimating ? 'opacity-100 translate-y-0 translate-x-0' : 'opacity-0 translate-y-6 -translate-x-8'
-                      }`}>
-                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-                          <Code className={`h-6 w-6 text-purple-600 mr-2 transition-all duration-500 ${
-                            isModalAnimating ? 'scale-100 rotate-0' : 'scale-0 rotate-180'
-                          }`} />
-                          Technologies We Use
-                        </h3>
-                        <div className="flex flex-wrap gap-2">
-                          {selectedService.technologies.map((tech, index) => (
-                            <span key={index} className={`px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded-full text-sm font-medium transition-all duration-400 ease-out hover:scale-105 ${
-                              isModalAnimating ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-75 translate-y-2'
-                            }`} style={{ transitionDelay: isModalAnimating ? `${600 + index * 40}ms` : '0ms' }}>
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Right Column */}
-                    <div className="space-y-8">
-                      {/* Process */}
-                      <div className={`transition-all duration-600 ease-out ${
-                        isModalAnimating ? 'opacity-100 translate-y-0 translate-x-0' : 'opacity-0 translate-y-6 translate-x-8'
-                      }`}>
-                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-                          <Clock className={`h-6 w-6 text-orange-600 mr-2 transition-all duration-500 ${
-                            isModalAnimating ? 'scale-100 rotate-0' : 'scale-0 rotate-180'
-                          }`} />
-                          Our Process
-                        </h3>
-                        <div className="space-y-4">
-                          {selectedService.process.map((step, index) => (
-                            <div key={index} className={`flex items-start transition-all duration-500 ease-out ${
-                              isModalAnimating ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
-                            }`} style={{ transitionDelay: isModalAnimating ? `${300 + index * 80}ms` : '0ms' }}>
-                              <div className={`w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-sm mr-4 flex-shrink-0 transition-all duration-400 hover:scale-110 ${
-                                isModalAnimating ? 'scale-100 rotate-0' : 'scale-0 rotate-180'
-                              }`} style={{ transitionDelay: isModalAnimating ? `${400 + index * 80}ms` : '0ms' }}>
-                                {index + 1}
-                              </div>
-                              <div className={`transition-all duration-400 ease-out ${
-                                isModalAnimating ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
-                              }`} style={{ transitionDelay: isModalAnimating ? `${500 + index * 80}ms` : '0ms' }}>
-                                <h4 className="font-semibold text-gray-900 dark:text-white mb-1">{step.step}</h4>
-                                <p className="text-gray-600 dark:text-gray-300 text-sm">{step.description}</p>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* CTA with animation */}
-                  <div className={`mt-12 text-center transition-all duration-800 ease-out ${
-                    isModalAnimating ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
-                  }`}>
-                    <div className={`bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-6 text-white relative overflow-hidden group hover:shadow-2xl hover:shadow-blue-500/25 transition-all duration-500 ${
-                      isModalAnimating ? 'rotate-0' : 'rotate-1'
-                    }`}>
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                      <div className="relative z-10">
-                        <h3 className={`text-2xl font-bold mb-2 transition-all duration-600 ease-out ${
-                          isModalAnimating ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                        }`}>Ready to Get Started?</h3>
-                        <p className={`text-blue-100 mb-4 transition-all duration-700 ease-out ${
-                          isModalAnimating ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                        }`}>Let's discuss your project and create a custom solution for your business.</p>
-                        <button 
-                          onClick={handleConsultation}
-                          className={`bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:shadow-lg hover:-translate-y-1 transition-all duration-300 hover:scale-105 relative overflow-hidden group/cta ${
-                            isModalAnimating ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-90'
-                          }`}
+                  {/* Modal Content */}
+                  <div className="max-h-[85vh] overflow-y-auto p-8 lg:p-12">
+                    {/* Header */}
+                    <motion.div 
+                      className="flex flex-col lg:flex-row items-start lg:items-center mb-12"
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1, duration: 0.5 }}
+                    >
+                      <motion.div 
+                        className={`w-24 h-24 bg-gradient-to-r ${selectedService.gradient} rounded-3xl flex items-center justify-center mb-6 lg:mb-0 lg:mr-8 shadow-lg`}
+                        initial={{ scale: 0, rotate: -180 }}
+                        animate={{ scale: 1, rotate: 0 }}
+                        transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                      >
+                        <selectedService.icon className="h-12 w-12 text-white" />
+                      </motion.div>
+                      <div className="flex-1">
+                        <motion.h2 
+                          className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4"
+                          initial={{ opacity: 0, x: -30 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.3, duration: 0.5 }}
                         >
-                          <div className="absolute inset-0 bg-blue-50 opacity-0 group-hover/cta:opacity-100 transition-opacity duration-300"></div>
-                          <span className="relative z-10">
-                            Schedule a Consultation
-                          </span>
-                        </button>
+                          {selectedService.title}
+                        </motion.h2>
+                        <motion.p 
+                          className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed"
+                          initial={{ opacity: 0, x: -30 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.4, duration: 0.5 }}
+                        >
+                          {selectedService.description}
+                        </motion.p>
+                      </div>
+                    </motion.div>
+
+                    <div className="grid grid-cols-1 xl:grid-cols-2 gap-12">
+                      {/* Left Column */}
+                      <div className="space-y-10">
+                        {/* Features */}
+                        <motion.div
+                          variants={staggerContainer}
+                          initial="hidden"
+                          animate="visible"
+                        >
+                          <motion.h3 
+                            className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center"
+                            variants={staggerItem}
+                          >
+                            <CheckCircle className="h-7 w-7 text-blue-600 mr-3" />
+                            Key Features
+                          </motion.h3>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {selectedService.features.map((feature, index) => (
+                              <motion.div 
+                                key={index} 
+                                className="flex items-center text-gray-700 dark:text-gray-300 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                                variants={staggerItem}
+                              >
+                                <div className="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0"></div>
+                                <span className="text-sm font-medium">{feature}</span>
+                              </motion.div>
+                            ))}
+                          </div>
+                        </motion.div>
+
+                        {/* Benefits */}
+                        <motion.div
+                          variants={staggerContainer}
+                          initial="hidden"
+                          animate="visible"
+                        >
+                          <motion.h3 
+                            className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center"
+                            variants={staggerItem}
+                          >
+                            <TrendingUp className="h-7 w-7 text-green-600 mr-3" />
+                            Business Benefits
+                          </motion.h3>
+                          <div className="space-y-4">
+                            {selectedService.benefits.map((benefit, index) => (
+                              <motion.div 
+                                key={index} 
+                                className="flex items-start text-gray-700 dark:text-gray-300 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border-l-4 border-green-500"
+                                variants={staggerItem}
+                              >
+                                <div className="w-2 h-2 bg-green-500 rounded-full mr-4 mt-2 flex-shrink-0"></div>
+                                <span className="leading-relaxed">{benefit}</span>
+                              </motion.div>
+                            ))}
+                          </div>
+                        </motion.div>
+                      </div>
+
+                      {/* Right Column */}
+                      <div className="space-y-10">
+                        {/* Technologies */}
+                        <motion.div
+                          variants={staggerContainer}
+                          initial="hidden"
+                          animate="visible"
+                        >
+                          <motion.h3 
+                            className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center"
+                            variants={staggerItem}
+                          >
+                            <Code className="h-7 w-7 text-purple-600 mr-3" />
+                            Technologies We Use
+                          </motion.h3>
+                          <div className="flex flex-wrap gap-3">
+                            {selectedService.technologies.map((tech, index) => (
+                              <motion.span 
+                                key={index} 
+                                className="px-4 py-2 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 rounded-full text-sm font-medium hover:scale-105 transition-transform duration-200 cursor-default"
+                                variants={staggerItem}
+                                whileHover={{ scale: 1.05 }}
+                              >
+                                {tech}
+                              </motion.span>
+                            ))}
+                          </div>
+                        </motion.div>
+
+                        {/* Process */}
+                        <motion.div
+                          variants={staggerContainer}
+                          initial="hidden"
+                          animate="visible"
+                        >
+                          <motion.h3 
+                            className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center"
+                            variants={staggerItem}
+                          >
+                            <Clock className="h-7 w-7 text-orange-600 mr-3" />
+                            Our Process
+                          </motion.h3>
+                          <div className="space-y-6">
+                            {selectedService.process.map((step, index) => (
+                              <motion.div 
+                                key={index} 
+                                className="flex items-start p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg border-l-4 border-orange-500"
+                                variants={staggerItem}
+                              >
+                                <div className="w-10 h-10 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-sm mr-4 flex-shrink-0 shadow-lg">
+                                  {index + 1}
+                                </div>
+                                <div>
+                                  <h4 className="font-semibold text-gray-900 dark:text-white mb-2 text-lg">{step.step}</h4>
+                                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{step.description}</p>
+                                </div>
+                              </motion.div>
+                            ))}
+                          </div>
+                        </motion.div>
                       </div>
                     </div>
+
+                    {/* CTA */}
+                    <motion.div 
+                      className="mt-12 text-center"
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.6, duration: 0.5 }}
+                    >
+                      <div className={`bg-gradient-to-r ${selectedService.gradient} rounded-2xl p-8 text-white relative overflow-hidden group hover:shadow-2xl hover:shadow-blue-500/25 transition-all duration-500`}>
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div className="relative z-10">
+                          <h3 className="text-3xl font-bold mb-4">Ready to Get Started?</h3>
+                          <p className="text-blue-100 mb-6 text-lg">Let's discuss your project and create a custom solution for your business.</p>
+                          <motion.button 
+                            onClick={handleConsultation}
+                            className="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold hover:shadow-lg hover:-translate-y-1 transition-all duration-300 hover:scale-105 relative overflow-hidden group/cta text-lg"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                          >
+                            <div className="absolute inset-0 bg-blue-50 opacity-0 group-hover/cta:opacity-100 transition-opacity duration-300"></div>
+                            <span className="relative z-10">
+                              Schedule a Consultation
+                            </span>
+                          </motion.button>
+                        </div>
+                      </div>
+                    </motion.div>
                   </div>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
