@@ -55,7 +55,7 @@ const Header = () => {
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-orange-500 rounded-full animate-pulse group-hover:animate-bounce"></div>
             </div>
             <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300">
-              CodeBlend
+              CodByt
             </span>
           </div>
 

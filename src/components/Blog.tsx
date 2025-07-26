@@ -26,7 +26,7 @@ const Blog = () => {
     {
       title: 'The Future of SaaS: Trends to Watch in 2025',
       excerpt: 'Explore the emerging trends shaping the SaaS landscape, from AI integration to micro-services architecture and what it means for businesses.',
-      author: 'CodeBlend Team',
+      author: 'CodByt Team',
       date: '2024-12-15',
       readTime: '8 min read',
       category: 'SaaS Trends',

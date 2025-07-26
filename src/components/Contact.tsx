@@ -61,7 +61,7 @@ const Contact = () => {
     {
       icon: Mail,
       title: 'Email Us',
-      details: ['hello@codeblend.com', 'support@codeblend.com'],
+      details: ['hello@codbyt.com', 'support@codbyt.com'],
       action: 'Send Email'
     }
   ];

@@ -246,7 +246,7 @@ const Hero = () => {
           <h1 className={`text-5xl xs:text-6xl sm:text-7xl md:text-8xl font-bold text-gray-900 dark:text-white mb-6 leading-tight transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             Transform Your Business with
             <span className={`block bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent dark:from-blue-400 dark:via-purple-400 dark:to-blue-600 transition-all duration-1200 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              CodeBlend Solutions
+              CodByt Solutions
             </span>
           </h1>
 
