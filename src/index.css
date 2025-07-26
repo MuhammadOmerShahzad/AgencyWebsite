@@ -15,3 +15,21 @@
 .animate-pop7 { animation: pop 5.2s ease-in-out infinite; animation-delay: 0.8s; }
 .animate-pop8 { animation: pop 6.2s ease-in-out infinite; animation-delay: 1.2s; }
 .animate-pop9 { animation: pop 5.8s ease-in-out infinite; animation-delay: 2.2s; }
+
+/* Custom scrollbar for modal */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.5);
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.8);
+}
