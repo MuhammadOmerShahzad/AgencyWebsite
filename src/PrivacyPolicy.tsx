@@ -4,15 +4,15 @@ import { useNavigate } from 'react-router-dom';
 const PrivacyPolicy = () => {
   const navigate = useNavigate();
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 dark:from-black dark:via-gray-900 dark:to-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-teal-50 to-cyan-50 dark:from-black dark:via-gray-900 dark:to-gray-900">
       <div className="max-w-3xl mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center space-x-2 cursor-pointer select-none">
-            <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">CodByt</span>
+            <span className="text-2xl font-bold bg-gradient-to-r from-teal-500 to-cyan-500 bg-clip-text text-transparent">CodByt</span>
           </div>
           <button
             onClick={() => navigate('/')}
-            className="px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors duration-200"
+            className="px-4 py-2 rounded-lg bg-teal-600 text-white font-semibold hover:bg-teal-700 transition-colors duration-200"
           >
             Back to Home
           </button>
@@ -23,7 +23,7 @@ const PrivacyPolicy = () => {
             <p>The website ("Site") for CodByt LLC ("CodByt", "We", "Our", "Us" or "Company") was created to provide software development services (the "Services").</p>
             <p>The privacy of our Site visitors ("you," "your," or "user") is important to us, and in order to protect your personal information, we have implemented the following Privacy Policy with provisions that apply to the collection of data by CodByt, its subsidiaries, and its affiliates.</p>
             <p>Our Privacy Policy discloses the type and nature of information we collect and how we use it, as well as the choices you can make about the way your information is collected and used. We also explain how any requests for personal or personally identifiable information will be used. By exploring and using CodByt's Site and/or Services, and by submitting information to CodByt, you signify acceptance to the terms of our Privacy Policy.</p>
-            <p>If you have questions or concerns regarding this statement, you should first contact us at <a href="mailto:sales@codbyt.com" className="text-blue-600 underline">sales@codbyt.com</a>.</p>
+            <p>If you have questions or concerns regarding this statement, you should first contact us at <a href="mailto:info@codbyt.com" className="text-blue-600 underline">info@codbyt.com</a>.</p>
             <h2 className="text-2xl font-semibold mt-8 mb-2">Updates and Changes to the Privacy Policy</h2>
             <p>In the event of a change in this policy, a revised Privacy Policy will be posted to our Website, and the "Updated" date will be changed. If the revised Privacy Policy contains a material change to how we collect or use personal information, notice of the change will be emailed to you or posted on the Website's home page.</p>
             <p>Please revisit this page to familiarize yourself with changes to the Privacy Policy. You agree to accept posting of a revised Privacy Policy as described herein as actual notice to you of such revised Privacy Policy. Your continued use of the Services after such posting constitutes the collection and use of your information as described in the then-current Privacy Policy.</p>

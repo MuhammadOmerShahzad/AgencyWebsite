@@ -4,15 +4,15 @@ import { useNavigate } from 'react-router-dom';
 const TermsOfService = () => {
   const navigate = useNavigate();
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 dark:from-black dark:via-gray-900 dark:to-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-teal-50 to-cyan-50 dark:from-black dark:via-gray-900 dark:to-gray-900">
       <div className="max-w-3xl mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center space-x-2 cursor-pointer select-none">
-            <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">CodByt</span>
+            <span className="text-2xl font-bold bg-gradient-to-r from-teal-500 to-cyan-500 bg-clip-text text-transparent">CodByt</span>
           </div>
           <button
             onClick={() => navigate('/')}
-            className="px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors duration-200"
+            className="px-4 py-2 rounded-lg bg-teal-600 text-white font-semibold hover:bg-teal-700 transition-colors duration-200"
           >
             Back to Home
           </button>
@@ -37,7 +37,7 @@ const TermsOfService = () => {
             <p>These terms and conditions shall be governed by and construed in accordance with the laws of the jurisdiction in which CodByt operates, without regard to its conflict of law provisions.</p>
             
             <h2 className="text-2xl font-semibold mt-8 mb-2">Contact Information</h2>
-            <p>If you have any questions about these Terms of Service, please contact us at <a href="mailto:legal@codbyt.com" className="text-blue-600 underline">legal@codbyt.com</a>.</p>
+            <p>If you have any questions about these Terms of Service, please contact us at <a href="mailto:info@codbyt.com" className="text-blue-600 underline">info@codbyt.com</a>.</p>
           </div>
         </div>
       </div>

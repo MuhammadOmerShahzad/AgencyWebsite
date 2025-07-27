@@ -51,10 +51,10 @@ const Header = () => {
         <div className="flex justify-between items-center h-16 relative">
           <div className="flex items-center space-x-2 cursor-pointer group" onClick={() => scrollToSection('home')}>
             <div className="relative">
-              <Code2 className="h-8 w-8 text-blue-600 group-hover:scale-110 transition-transform duration-300" />
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-orange-500 rounded-full animate-pulse group-hover:animate-bounce"></div>
+              <Code2 className="h-8 w-8 text-teal-600 group-hover:scale-110 transition-transform duration-200" />
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-cyan-500 rounded-full animate-pulse group-hover:animate-bounce"></div>
             </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300">
+            <span className="text-2xl font-bold bg-gradient-to-r from-teal-500 to-cyan-500 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-200">
               CodByt
             </span>
           </div>
@@ -65,22 +65,22 @@ const Header = () => {
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
-                className={`relative font-medium transition-all duration-300 hover:text-blue-600 hover:-translate-y-0.5 ${
+                className={`relative font-medium transition-all duration-200 hover:text-teal-600 hover:-translate-y-0.5 ${
                   isScrolled ? 'text-gray-700 dark:text-gray-200' : 'text-gray-800 dark:text-gray-100'
                 } ${
-                  activeSection === item.toLowerCase() ? 'text-blue-600 dark:text-blue-400' : ''
+                  activeSection === item.toLowerCase() ? 'text-teal-600 dark:text-teal-400' : ''
                 }`}
               >
                 {item}
                 {activeSection === item.toLowerCase() && (
-                  <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full animate-pulse"></div>
+                  <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full animate-pulse"></div>
                 )}
               </button>
             ))}
             {/* Dark mode toggle */}
             <button
               onClick={toggleDarkMode}
-              className="ml-4 p-2 rounded-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-300 flex items-center justify-center"
+              className="ml-4 p-2 rounded-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 flex items-center justify-center"
               aria-label="Toggle dark mode"
             >
               {darkMode ? (

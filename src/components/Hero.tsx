@@ -181,7 +181,7 @@ const Hero = () => {
   }, [typedSnippets]);
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 dark:from-black dark:via-gray-900 dark:to-gray-900 px-2 sm:px-4 pt-28 sm:pt-32">
+          <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-teal-50 to-cyan-50 dark:from-black dark:via-teal-900/20 dark:to-cyan-900/20 px-2 sm:px-4 pt-28 sm:pt-32">
       {/* Animated Tech Icons Background (dynamic) */}
       <div className="absolute inset-0 w-full h-full z-0 pointer-events-none select-none">
         {floatingIcons.map(icon => (
@@ -237,7 +237,7 @@ const Hero = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 text-center mt-0 sm:mt-10 md:mt-20">
         <div className={`transition-all duration-1200 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'}`}>
           {/* Badge */}
-          <div className={`inline-flex items-center space-x-2 bg-blue-100 text-blue-800 dark:bg-gray-800 dark:text-blue-300 px-4 py-2 rounded-full text-xs sm:text-sm font-medium mb-8 mt-2 sm:mt-4 transition-all duration-800 delay-200 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+          <div className={`inline-flex items-center space-x-2 bg-teal-100 text-teal-800 dark:bg-gray-800 dark:text-teal-300 px-4 py-2 rounded-full text-xs sm:text-sm font-medium mb-8 mt-2 sm:mt-4 transition-all duration-800 delay-200 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
             <Sparkles className="h-4 w-4" />
             <span>Leading IT Solutions & Automation</span>
           </div>
@@ -245,7 +245,7 @@ const Hero = () => {
           {/* Main Heading */}
           <h1 className={`text-5xl xs:text-6xl sm:text-7xl md:text-8xl font-bold text-gray-900 dark:text-white mb-6 leading-tight transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             Transform Your Business with
-            <span className={`block bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent dark:from-blue-400 dark:via-purple-400 dark:to-blue-600 transition-all duration-1200 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <span className={`block bg-gradient-to-r from-teal-500 via-cyan-500 to-teal-600 bg-clip-text text-transparent dark:from-teal-400 dark:via-cyan-400 dark:to-teal-600 transition-all duration-1200 delay-600 drop-shadow-lg ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               CodByt Solutions
             </span>
           </h1>
@@ -260,17 +260,17 @@ const Hero = () => {
           <div className={`flex flex-col sm:flex-row gap-4 justify-center items-center mb-10 sm:mb-16 transition-all duration-1000 delay-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <button 
               onClick={scrollToContact}
-              className="group w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/25 hover:scale-105 hover:-translate-y-1 flex items-center justify-center space-x-2 relative overflow-hidden"
+              className="group w-full sm:w-auto bg-gradient-to-r from-teal-500 to-cyan-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg transition-all duration-200 hover:shadow-2xl hover:shadow-teal-500/25 hover:scale-105 hover:-translate-y-1 flex items-center justify-center space-x-2 relative overflow-hidden drop-shadow-lg"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-teal-700 to-cyan-700 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
               <div className="relative z-10 flex items-center space-x-2">
               <span>Start Your Journey</span>
-              <ArrowRight className="h-5 w-5 group-hover:translate-x-2 transition-transform duration-300" />
+              <ArrowRight className="h-5 w-5 group-hover:translate-x-2 transition-transform duration-200" />
               </div>
             </button>
             
-            <button onClick={scrollToPortfolio} className="w-full sm:w-auto bg-white dark:bg-gray-900 border-2 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-200 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:border-blue-600 hover:text-blue-600 dark:hover:text-blue-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group">
-              <div className="absolute inset-0 bg-blue-50 dark:bg-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <button onClick={scrollToPortfolio} className="w-full sm:w-auto bg-white dark:bg-gray-900 border-2 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-200 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:border-teal-600 hover:text-teal-600 dark:hover:text-teal-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 relative overflow-hidden group">
+              <div className="absolute inset-0 bg-teal-50 dark:bg-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
               <span className="relative z-10">
               View Our Work
               </span>

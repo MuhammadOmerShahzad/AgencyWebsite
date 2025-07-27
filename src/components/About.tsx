@@ -118,7 +118,7 @@ const About = () => {
         {/* Section Header */}
         <div className={`text-center mb-16 transition-transform duration-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-            About <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent dark:from-blue-400 dark:to-purple-400">CodByt</span>
+            About <span className="bg-gradient-to-r from-teal-500 to-cyan-500 bg-clip-text text-transparent dark:from-teal-400 dark:to-cyan-400">CodByt</span>
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             We're a dynamic team of technology experts passionate about creating solutions that transform businesses and drive success.
@@ -130,13 +130,13 @@ const About = () => {
           {stats.map((stat, index) => (
             <div 
               key={index} 
-              className={`text-center p-8 bg-blue-50 dark:bg-gray-900 rounded-2xl hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-2 hover:scale-105 transition-transform duration-200 cursor-pointer group border border-blue-100 dark:border-gray-800 ${
+              className={`text-center p-8 bg-white dark:bg-gray-900 rounded-2xl hover:shadow-xl hover:shadow-teal-500/10 hover:-translate-y-1 hover:scale-105 transition-transform duration-200 cursor-pointer group border border-gray-200 dark:border-gray-800 hover:border-teal-200 dark:hover:border-teal-700 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
               }`}
               style={{ transitionDelay: `${index * 60 + 100}ms` }}
             >
-              <stat.icon className="h-8 w-8 text-blue-600 dark:text-blue-400 mx-auto mb-4 group-hover:scale-110 group-hover:text-purple-600 transition-all duration-300" />
-              <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+              <stat.icon className="h-8 w-8 text-teal-600 dark:text-teal-400 mx-auto mb-4 group-hover:scale-110 group-hover:text-cyan-600 transition-all duration-200" />
+              <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-200">
                 {stat.number}{stat.suffix}
               </div>
               <div className="text-gray-600 dark:text-gray-300 font-medium">{stat.label}</div>
@@ -149,15 +149,15 @@ const About = () => {
           {values.map((value, index) => (
             <div 
               key={index}
-              className={`bg-blue-50 dark:bg-gray-900 p-8 rounded-2xl shadow-lg hover:shadow-xl hover:shadow-blue-500/10 transition-transform duration-200 hover:-translate-y-2 hover:scale-105 group cursor-pointer border border-blue-100 dark:border-gray-800 ${
+              className={`bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-lg hover:shadow-xl hover:shadow-teal-500/10 transition-transform duration-200 hover:-translate-y-1 hover:scale-105 group cursor-pointer border border-gray-200 dark:border-gray-800 hover:border-teal-200 dark:hover:border-teal-700 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
               style={{ transitionDelay: `${index * 80 + 200}ms` }}
             >
-              <div className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 w-12 h-12 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                <value.icon className="h-6 w-6 text-white group-hover:scale-110 transition-transform duration-300" />
+              <div className="bg-gradient-to-r from-teal-500 to-cyan-500 dark:from-teal-400 dark:to-cyan-400 w-12 h-12 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-200">
+                <value.icon className="h-6 w-6 text-white group-hover:scale-110 transition-transform duration-200" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">{value.title}</h3>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-200">{value.title}</h3>
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors duration-300">{value.description}</p>
             </div>
           ))}
@@ -178,7 +178,7 @@ const About = () => {
             {skills.map((skill, index) => (
               <div
                 key={index}
-                className={`inline-block flex-shrink-0 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-gray-800 dark:to-gray-900 px-12 py-10 rounded-2xl font-semibold text-gray-800 dark:text-gray-200 text-xl hover:shadow-xl hover:shadow-blue-500/20 hover:-translate-y-1 hover:scale-105 transition-transform duration-300 cursor-pointer text-center align-top ${
+                className={`inline-block flex-shrink-0 bg-white dark:bg-gray-800 px-12 py-10 rounded-2xl font-semibold text-gray-800 dark:text-gray-200 text-xl hover:shadow-xl hover:shadow-teal-500/20 hover:-translate-y-1 hover:scale-105 transition-transform duration-200 cursor-pointer text-center align-top border border-gray-200 dark:border-gray-700 hover:border-teal-200 dark:hover:border-teal-600 ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
                 }`}
                 style={{ minWidth: '240px', transitionDelay: `${index * 40 + 300}ms` }}
