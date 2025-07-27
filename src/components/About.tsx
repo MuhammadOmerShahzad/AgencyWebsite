@@ -174,6 +174,8 @@ const About = () => {
             onMouseLeave={() => setPaused(false)}
             onFocus={() => setPaused(true)}
             onBlur={() => setPaused(false)}
+            onTouchStart={() => setPaused(true)}
+            onTouchEnd={() => setPaused(false)}
           >
             {skills.map((skill, index) => (
               <div
