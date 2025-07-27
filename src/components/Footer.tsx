@@ -117,20 +117,7 @@ const Footer = () => {
               <div className="flex items-start space-x-3">
                 <Mail className="h-5 w-5 text-teal-400 mt-1 flex-shrink-0 hover:scale-110 transition-transform duration-300" />
                 <div>
-                                  <p className="text-gray-300 dark:text-gray-400 hover:text-teal-400 dark:hover:text-teal-300 transition-colors duration-300 cursor-pointer">info@codbyt.com</p>
-                </div>
-              </div>
-              <div className="flex items-start space-x-3">
-                <Phone className="h-5 w-5 text-teal-400 mt-1 flex-shrink-0 hover:scale-110 transition-transform duration-300" />
-                <div>
-                  
-                </div>
-              </div>
-              <div className="flex items-start space-x-3">
-                <MapPin className="h-5 w-5 text-teal-400 mt-1 flex-shrink-0 hover:scale-110 transition-transform duration-300" />
-                <div>
-                  <p className="text-gray-300 dark:text-gray-400 hover:text-teal-400 dark:hover:text-teal-300 transition-colors duration-300">123 Innovation Drive</p>
-                  <p className="text-gray-300 dark:text-gray-400 hover:text-teal-400 dark:hover:text-teal-300 transition-colors duration-300">Tech City, TC 12345</p>
+                  <p className="text-gray-300 dark:text-gray-400 hover:text-teal-400 dark:hover:text-teal-300 transition-colors duration-300 cursor-pointer">info@codbyt.com</p>
                 </div>
               </div>
             </div>
