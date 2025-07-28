@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -13,15 +14,17 @@ import SEO from './components/SEO';
 import StructuredData, { OrganizationData, WebSiteData, ServiceData } from './components/StructuredData';
 import PerformanceOptimizer from './components/PerformanceOptimizer';
 import SEOAnalysis from './components/SEOAnalysis';
+import TermsOfService from './TermsOfService';
+import PrivacyPolicy from './PrivacyPolicy';
 
-function App() {
+// Home page component
+const HomePage = () => {
   const pageTitle = "CodByt Solutions";
   const pageDescription = "Leading IT SaaS & Automation Agency specializing in SaaS development, automation workflows, and full-stack applications. Transform your business with cutting-edge technology solutions.";
   const pageKeywords = ['SaaS', 'Automation', 'Full-Stack', 'Web Development', 'IT Solutions'];
 
   return (
-    <ThemeProvider>
-      <PerformanceOptimizer />
+    <>
       <SEO 
         title={pageTitle}
         description={pageDescription}
@@ -38,7 +41,6 @@ function App() {
       <StructuredData type="Organization" data={OrganizationData} />
       <StructuredData type="WebSite" data={WebSiteData} />
       <StructuredData type="Service" data={ServiceData} />
-      <Header />
       <main>
         <Hero />
         <About />
@@ -48,7 +50,23 @@ function App() {
         <Blog />
         <Contact />
       </main>
-      <Footer />
+    </>
+  );
+};
+
+function App() {
+  return (
+    <ThemeProvider>
+      <PerformanceOptimizer />
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/terms" element={<TermsOfService />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+        </Routes>
+        <Footer />
+      </Router>
     </ThemeProvider>
   );
 }

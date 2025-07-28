@@ -237,13 +237,13 @@ const Hero = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 text-center mt-0 sm:mt-10 md:mt-20">
         <div className={`transition-all duration-1200 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'}`}>
           {/* Badge */}
-          <div className={`inline-flex items-center space-x-2 bg-teal-100 text-teal-800 dark:bg-gray-800 dark:text-teal-300 px-4 py-2 rounded-full text-xs sm:text-sm font-medium mb-8 mt-2 sm:mt-4 transition-all duration-800 delay-200 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-            <Sparkles className="h-4 w-4" />
-            <span>Leading IT Solutions & Automation</span>
+          <div className={`inline-flex items-center space-x-2 bg-teal-100 text-teal-800 dark:bg-gray-800 dark:text-teal-300 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium mb-6 sm:mb-8 mt-2 sm:mt-4 transition-all duration-800 delay-200 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+            <Sparkles className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="text-xs sm:text-sm">Leading IT Solutions & Automation</span>
           </div>
 
           {/* Main Heading */}
-          <h1 className={`text-5xl xs:text-6xl sm:text-7xl md:text-8xl font-bold text-gray-900 dark:text-white mb-6 leading-tight transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <h1 className={`text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 leading-tight transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             Transform Your Business with
             <span className={`block bg-gradient-to-r from-teal-500 via-cyan-500 to-teal-600 bg-clip-text text-transparent dark:from-teal-400 dark:via-cyan-400 dark:to-teal-600 transition-all duration-1200 delay-600 drop-shadow-lg ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               CodByt Solutions
@@ -251,25 +251,25 @@ const Hero = () => {
           </h1>
 
           {/* Subheading */}
-          <p className={`text-base sm:text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 sm:mb-12 max-w-xl sm:max-w-4xl mx-auto leading-relaxed transition-all duration-1000 delay-800 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <p className={`text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-gray-600 dark:text-gray-300 mb-6 sm:mb-8 lg:mb-12 max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-4xl mx-auto leading-relaxed transition-all duration-1000 delay-800 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             We specialize in SaaS development, automation workflows, and full-stack applications 
             that drive growth and efficiency for businesses of all sizes.
           </p>
 
           {/* CTA Buttons */}
-          <div className={`flex flex-col sm:flex-row gap-4 justify-center items-center mb-10 sm:mb-16 transition-all duration-1000 delay-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className={`flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8 sm:mb-10 lg:mb-16 transition-all duration-1000 delay-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <button 
               onClick={scrollToContact}
-              className="group w-full sm:w-auto bg-gradient-to-r from-teal-500 to-cyan-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg transition-all duration-200 hover:shadow-2xl hover:shadow-teal-500/25 hover:scale-105 hover:-translate-y-1 flex items-center justify-center space-x-2 relative overflow-hidden drop-shadow-lg"
+              className="group w-full sm:w-auto bg-gradient-to-r from-teal-500 to-cyan-500 text-white px-4 sm:px-6 lg:px-8 py-3 sm:py-4 rounded-lg font-semibold text-sm sm:text-base lg:text-lg transition-all duration-200 hover:shadow-2xl hover:shadow-teal-500/25 hover:scale-105 hover:-translate-y-1 flex items-center justify-center space-x-2 relative overflow-hidden drop-shadow-lg"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-teal-700 to-cyan-700 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
               <div className="relative z-10 flex items-center space-x-2">
               <span>Start Your Journey</span>
-              <ArrowRight className="h-5 w-5 group-hover:translate-x-2 transition-transform duration-200" />
+              <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-2 transition-transform duration-200" />
               </div>
             </button>
             
-            <button onClick={scrollToPortfolio} className="w-full sm:w-auto bg-white dark:bg-gray-900 border-2 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-200 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:border-teal-600 hover:text-teal-600 dark:hover:text-teal-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 relative overflow-hidden group">
+            <button onClick={scrollToPortfolio} className="w-full sm:w-auto bg-white dark:bg-gray-900 border-2 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-200 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 rounded-lg font-semibold text-sm sm:text-base lg:text-lg hover:border-teal-600 hover:text-teal-600 dark:hover:text-teal-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 relative overflow-hidden group">
               <div className="absolute inset-0 bg-teal-50 dark:bg-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
               <span className="relative z-10">
               View Our Work
@@ -278,7 +278,7 @@ const Hero = () => {
           </div>
 
           {/* Feature Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10 max-w-2xl sm:max-w-4xl mx-auto mt-12 mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-xs sm:max-w-2xl lg:max-w-4xl mx-auto mt-8 sm:mt-12 mb-12 sm:mb-16">
             {[
               { icon: Zap, title: 'Automation', desc: 'Streamline workflows and boost productivity' },
               { icon: Globe, title: 'SaaS Solutions', desc: 'Scalable software for modern businesses' },
@@ -286,10 +286,11 @@ const Hero = () => {
             ].map((feature, index) => (
               <div 
                 key={index}
-                className={`bg-blue-50 dark:bg-gray-900/80 backdrop-blur-sm p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-200 hover:-translate-y-3 hover:scale-105 group cursor-pointer border border-blue-100 dark:border-gray-800`}
+                className={`bg-blue-50 dark:bg-gray-900/80 backdrop-blur-sm p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-200 hover:-translate-y-2 hover:scale-105 group cursor-pointer border border-blue-100 dark:border-gray-800 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                style={{ transitionDelay: `${index * 200}ms` }}
               >
-                <feature.icon className="h-8 w-8 text-blue-600 dark:text-blue-400 mb-4 mx-auto group-hover:scale-110 group-hover:text-purple-600 transition-all duration-300" />
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">{feature.title}</h3>
+                <feature.icon className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600 dark:text-blue-400 mb-3 sm:mb-4 mx-auto group-hover:scale-110 group-hover:text-purple-600 transition-all duration-300" />
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm sm:text-base group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">{feature.title}</h3>
                 <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors duration-300">{feature.desc}</p>
               </div>
             ))}

@@ -113,82 +113,66 @@ const About = () => {
   }, [paused]);
 
   return (
-    <section ref={sectionRef} id="about" className="py-20 bg-white dark:bg-black">
+    <section ref={sectionRef} id="about" className="py-16 sm:py-20 bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className={`text-center mb-16 transition-transform duration-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+        <div className={`text-center mb-12 sm:mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">
             About <span className="bg-gradient-to-r from-teal-500 to-cyan-500 bg-clip-text text-transparent dark:from-teal-400 dark:to-cyan-400">CodByt</span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            We're a dynamic team of technology experts passionate about creating solutions that transform businesses and drive success.
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            We are a dynamic IT solutions company specializing in SaaS development, automation workflows, and full-stack applications.
           </p>
         </div>
 
         {/* Stats Section */}
-        <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10 mb-16 sm:mb-24 transition-transform duration-300 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <div className={`grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           {stats.map((stat, index) => (
-            <div 
-              key={index} 
-              className={`text-center p-8 bg-white dark:bg-gray-900 rounded-2xl hover:shadow-xl hover:shadow-teal-500/10 hover:-translate-y-1 hover:scale-105 transition-transform duration-200 cursor-pointer group border border-gray-200 dark:border-gray-800 hover:border-teal-200 dark:hover:border-teal-700 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-              }`}
-              style={{ transitionDelay: `${index * 60 + 100}ms` }}
-            >
-              <stat.icon className="h-8 w-8 text-teal-600 dark:text-teal-400 mx-auto mb-4 group-hover:scale-110 group-hover:text-cyan-600 transition-all duration-200" />
-              <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-200">
+            <div key={index} className="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 text-center">
+              <stat.icon className="h-8 w-8 sm:h-12 sm:w-12 text-teal-600 dark:text-teal-400 mx-auto mb-4" />
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
                 {stat.number}{stat.suffix}
               </div>
-              <div className="text-gray-600 dark:text-gray-300 font-medium">{stat.label}</div>
+              <div className="text-sm sm:text-base text-gray-600 dark:text-gray-300">{stat.label}</div>
             </div>
           ))}
         </div>
 
         {/* Mission, Vision, Values */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 mb-16 sm:mb-24">
+        <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16 transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           {values.map((value, index) => (
-            <div 
-              key={index}
-              className={`bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-lg hover:shadow-xl hover:shadow-teal-500/10 transition-transform duration-200 hover:-translate-y-1 hover:scale-105 group cursor-pointer border border-gray-200 dark:border-gray-800 hover:border-teal-200 dark:hover:border-teal-700 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
-              style={{ transitionDelay: `${index * 80 + 200}ms` }}
-            >
-              <div className="bg-gradient-to-r from-teal-500 to-cyan-500 dark:from-teal-400 dark:to-cyan-400 w-12 h-12 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-200">
-                <value.icon className="h-6 w-6 text-white group-hover:scale-110 transition-transform duration-200" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-200">{value.title}</h3>
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors duration-300">{value.description}</p>
+            <div key={index} className="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+              <value.icon className="h-8 w-8 sm:h-12 sm:w-12 text-teal-600 dark:text-teal-400 mb-4" />
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3">{value.title}</h3>
+              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed">{value.description}</p>
             </div>
           ))}
         </div>
 
-        {/* Team Section */}
-        <div className={`text-center transition-transform duration-300 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Our Expertise</h3>
-          <div
+        {/* Skills Grid */}
+        <div className={`transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+            Our <span className="bg-gradient-to-r from-teal-500 to-cyan-500 bg-clip-text text-transparent dark:from-teal-400 dark:to-cyan-400">Expertise</span>
+          </h3>
+          
+          <div 
             ref={expertiseRef}
-            className="flex overflow-x-auto whitespace-nowrap gap-6 sm:gap-8 pb-2 scrollbar-none px-2"
-            style={{ WebkitOverflowScrolling: 'touch', msOverflowStyle: 'none', scrollbarWidth: 'none' }}
+            className="relative overflow-hidden bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 sm:p-8"
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
-            onFocus={() => setPaused(true)}
-            onBlur={() => setPaused(false)}
-            onTouchStart={() => setPaused(true)}
-            onTouchEnd={() => setPaused(false)}
           >
-            {skills.map((skill, index) => (
-              <div
-                key={index}
-                className={`inline-block flex-shrink-0 bg-white dark:bg-gray-800 px-12 py-10 rounded-2xl font-semibold text-gray-800 dark:text-gray-200 text-xl hover:shadow-xl hover:shadow-teal-500/20 hover:-translate-y-1 hover:scale-105 transition-transform duration-200 cursor-pointer text-center align-top border border-gray-200 dark:border-gray-700 hover:border-teal-200 dark:hover:border-teal-600 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
-                }`}
-                style={{ minWidth: '240px', transitionDelay: `${index * 40 + 300}ms` }}
-              >
-                {React.cloneElement(skill.icon, { className: (skill.icon.props.className || '') + ' h-10 w-10 mb-4' })}
-                <span className="block text-xs sm:text-sm font-semibold">{skill.name}</span>
-              </div>
-            ))}
+            <div className="flex space-x-8 sm:space-x-12 animate-scroll">
+              {[...skills, ...skills].map((skill, index) => (
+                <div key={index} className="flex-shrink-0 text-center min-w-[120px] sm:min-w-[140px]">
+                  <div className="bg-gray-50 dark:bg-gray-700 p-4 sm:p-6 rounded-xl hover:bg-teal-50 dark:hover:bg-teal-900/20 transition-all duration-300 hover:scale-105 group">
+                    {skill.icon}
+                    <div className="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-200 mt-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                      {skill.name}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

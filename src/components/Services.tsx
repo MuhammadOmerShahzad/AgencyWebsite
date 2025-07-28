@@ -314,244 +314,209 @@ const Services = () => {
   ));
 
   return (
-    <>
-      <section ref={sectionRef} id="services" className="py-20 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-black dark:to-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
-          <div className={`text-center mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-              Our <span className="bg-gradient-to-r from-teal-500 to-cyan-500 bg-clip-text text-transparent dark:from-teal-400 dark:to-cyan-400">Services</span>
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Comprehensive IT solutions designed to accelerate your business growth and digital transformation journey.
-            </p>
-          </div>
+    <section ref={sectionRef} id="services" className="py-16 sm:py-20 bg-white dark:bg-black">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className={`text-center mb-12 sm:mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">
+            Our <span className="bg-gradient-to-r from-teal-500 to-cyan-500 bg-clip-text text-transparent dark:from-teal-400 dark:to-cyan-400">Services</span>
+          </h2>
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            Comprehensive IT solutions designed to transform your business operations and drive growth.
+          </p>
+        </div>
 
-          {/* Services Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 sm:gap-10">
-            {services.map((service, index) => (
-              <ServiceCard key={service.id} service={service} index={index} />
-            ))}
-          </div>
-
-          {/* CTA Section */}
-          <div className={`text-center mt-16 transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-                      <div className="bg-gradient-to-r from-teal-500 to-cyan-500 dark:from-teal-800 dark:to-cyan-800 rounded-2xl p-8 text-white relative overflow-hidden group hover:shadow-2xl hover:shadow-teal-500/25 transition-all duration-200 ease-out">
-            <div className="absolute inset-0 bg-gradient-to-r from-teal-700 to-cyan-700 dark:from-teal-900 dark:to-cyan-900 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-out"></div>
-              <div className="relative z-10">
-                <h3 className="text-3xl font-bold mb-4">Ready to Transform Your Business?</h3>
-                                  <p className="text-xl mb-6 text-teal-100 dark:text-teal-200">Let's discuss how our solutions can drive your success forward.</p>
-                <button 
-                  onClick={scrollToContact}
-                  className="bg-white dark:bg-gray-900 text-teal-600 dark:text-teal-400 px-8 py-3 rounded-lg font-semibold hover:shadow-lg hover:-translate-y-1 transition-all duration-150 ease-out relative overflow-hidden group/cta"
-                >
-                  <div className="absolute inset-0 bg-teal-50 dark:bg-gray-800 opacity-0 group-hover/cta:opacity-100 transition-opacity duration-150 ease-out"></div>
-                  <span className="relative z-10">Get Started Today</span>
-                </button>
+        {/* Services Grid */}
+        <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          {services.map((service, index) => (
+            <div
+              key={service.id}
+              onClick={() => {
+                setSelectedService(service);
+                setIsModalOpen(true);
+              }}
+              className={`bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl hover:shadow-teal-500/10 transition-all duration-300 hover:-translate-y-2 hover:scale-105 cursor-pointer border border-gray-200 dark:border-gray-800 hover:border-teal-200 dark:hover:border-teal-700 group ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}
+              style={{ transitionDelay: `${index * 100}ms` }}
+            >
+              <div className={`w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r ${service.color} rounded-xl flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                <service.icon className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                {service.title}
+              </h3>
+              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+                {service.shortDescription}
+              </p>
+              <div className="flex items-center mt-4 sm:mt-6 text-teal-600 dark:text-teal-400 group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors duration-300">
+                <span className="text-sm sm:text-base font-medium">Learn More</span>
+                <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
               </div>
             </div>
+          ))}
+        </div>
+
+        {/* CTA Section */}
+        <div className={`text-center transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className="bg-gradient-to-r from-teal-500 to-cyan-500 dark:from-teal-600 dark:to-cyan-600 rounded-2xl p-8 sm:p-12 shadow-xl">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6">
+              Ready to Transform Your Business?
+            </h3>
+            <p className="text-base sm:text-lg text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto">
+              Let's discuss your project and explore how our services can help you achieve your goals.
+            </p>
+            <button
+              onClick={scrollToContact}
+              className="bg-white dark:bg-gray-900 text-teal-600 dark:text-teal-400 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-sm sm:text-base hover:shadow-lg hover:-translate-y-1 transition-all duration-150 ease-out relative overflow-hidden group/cta"
+            >
+              <div className="absolute inset-0 bg-gray-100 dark:bg-gray-800 opacity-0 group-hover/cta:opacity-100 transition-opacity duration-200"></div>
+              <span className="relative z-10">Get Started Today</span>
+            </button>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Service Detail Modal */}
+      {/* Service Modal */}
       {isModalOpen && selectedService && (
-        <div className={`fixed inset-0 z-50 overflow-y-auto transition-all duration-200 ease-out ${
-          isClosing ? 'animate-out fade-out duration-200' : 'animate-in fade-in duration-200'
-        }`}>
-          <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-            {/* Backdrop */}
-            <div 
-              className={`fixed inset-0 bg-gray-900/80 backdrop-blur-sm transition-opacity duration-200 ease-out ${
-                isClosing ? 'animate-out fade-out duration-200' : 'animate-in fade-in duration-200'
-              }`}
-              onClick={closeModal}
-            />
-            
-            {/* Modal */}
-            <div className={`inline-block w-full max-w-7xl my-8 overflow-hidden text-left align-middle bg-white dark:bg-gray-900 shadow-2xl rounded-3xl transition-all duration-200 ease-out ${
-              isClosing ? 'animate-out zoom-out-95 duration-200' : 'animate-in zoom-in-95 duration-200'
-            }`}>
-              <div className="relative">
-                {/* Close Button */}
-                <button
-                  onClick={closeModal}
-                  className="absolute top-6 right-6 z-10 p-3 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-all duration-150 ease-out hover:scale-110 bg-gray-100 dark:bg-gray-800 rounded-full"
-                >
-                  <X className="h-6 w-6" />
-                </button>
-
-                {/* Modal Content */}
-                <div className="max-h-[85vh] overflow-y-auto p-8 lg:p-12">
-                  {/* Header */}
-                  <div className={`flex flex-col lg:flex-row items-start lg:items-center mb-12 transition-all duration-200 ease-out ${
-                    isClosing ? 'animate-out slide-out-to-top-4 duration-200' : 'animate-in slide-in-from-bottom-4 duration-300 delay-100'
-                  }`}>
-                    <div className={`w-24 h-24 bg-gradient-to-r ${selectedService.gradient} rounded-3xl flex items-center justify-center mb-6 lg:mb-0 lg:mr-8 shadow-lg transition-all duration-200 ease-out ${
-                      isClosing ? 'animate-out zoom-out-95 duration-200' : 'animate-in zoom-in-95 duration-300 delay-200'
-                    }`}>
-                      <selectedService.icon className="h-12 w-12 text-white" />
-                    </div>
-                    <div className="flex-1">
-                      <h2 className={`text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 transition-all duration-200 ease-out ${
-                        isClosing ? 'animate-out slide-out-to-top-4 duration-200' : 'animate-in slide-in-from-bottom-4 duration-300 delay-300'
-                      }`}>
-                        {selectedService.title}
-                      </h2>
-                      <p className={`text-xl text-gray-600 dark:text-gray-300 leading-relaxed transition-all duration-200 ease-out ${
-                        isClosing ? 'animate-out slide-out-to-top-4 duration-200' : 'animate-in slide-in-from-bottom-4 duration-300 delay-400'
-                      }`}>
-                        {selectedService.description}
-                      </p>
-                    </div>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div 
+            className={`absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ${
+              isClosing ? 'opacity-0' : 'opacity-100'
+            }`}
+            onClick={() => setIsClosing(true)}
+          />
+          <div className={`relative bg-white dark:bg-gray-900 rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto transition-all duration-300 ${
+            isClosing ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
+          }`}>
+            <div className="p-6 sm:p-8">
+              {/* Modal Header */}
+              <div className="flex items-start justify-between mb-6">
+                <div className="flex items-center space-x-4">
+                  <div className={`w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r ${selectedService.color} rounded-xl flex items-center justify-center`}>
+                    <selectedService.icon className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
                   </div>
-
-                  <div className="grid grid-cols-1 xl:grid-cols-2 gap-12">
-                    {/* Left Column */}
-                    <div className={`space-y-10 transition-all duration-300 ${
-                      isClosing ? 'animate-out slide-out-to-left-4 duration-300' : 'animate-in slide-in-from-left-4 duration-500 delay-600'
-                    }`}>
-                      {/* Features */}
-                      <div>
-                        <h3 className={`text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center transition-all duration-300 ${
-                          isClosing ? 'animate-out slide-out-to-top-4 duration-300' : 'animate-in slide-in-from-bottom-4 duration-500 delay-700'
-                        }`}>
-                          <CheckCircle className="h-7 w-7 text-teal-600 mr-3" />
-                          Key Features
-                        </h3>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                          {selectedService.features.map((feature, index) => (
-                            <div 
-                              key={index} 
-                              className={`flex items-center text-gray-700 dark:text-gray-300 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-300 hover:scale-105 ${
-                                isClosing ? 'animate-out slide-out-to-top-4 duration-300' : 'animate-in slide-in-from-bottom-4 duration-500'
-                              }`}
-                              style={{ 
-                                animationDelay: isClosing ? `${index * 50}ms` : `${800 + index * 100}ms` 
-                              }}
-                            >
-                              <div className="w-2 h-2 bg-teal-500 rounded-full mr-3 flex-shrink-0"></div>
-                              <span className="text-sm font-medium">{feature}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Benefits */}
-                      <div>
-                        <h3 className={`text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center transition-all duration-300 ${
-                          isClosing ? 'animate-out slide-out-to-top-4 duration-300' : 'animate-in slide-in-from-bottom-4 duration-500 delay-900'
-                        }`}>
-                          <TrendingUp className="h-7 w-7 text-cyan-600 mr-3" />
-                          Business Benefits
-                        </h3>
-                        <div className="space-y-4">
-                          {selectedService.benefits.map((benefit, index) => (
-                            <div 
-                              key={index} 
-                              className={`flex items-start text-gray-700 dark:text-gray-300 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border-l-4 border-green-500 transition-all duration-300 hover:scale-105 ${
-                                isClosing ? 'animate-out slide-out-to-top-4 duration-300' : 'animate-in slide-in-from-bottom-4 duration-500'
-                              }`}
-                              style={{ 
-                                animationDelay: isClosing ? `${index * 50}ms` : `${1000 + index * 100}ms` 
-                              }}
-                            >
-                              <div className="w-2 h-2 bg-cyan-500 rounded-full mr-4 mt-2 flex-shrink-0"></div>
-                              <span className="leading-relaxed">{benefit}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Right Column */}
-                    <div className={`space-y-10 transition-all duration-300 ${
-                      isClosing ? 'animate-out slide-out-to-right-4 duration-300' : 'animate-in slide-in-from-right-4 duration-500 delay-600'
-                    }`}>
-                      {/* Technologies */}
-                      <div>
-                        <h3 className={`text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center transition-all duration-300 ${
-                          isClosing ? 'animate-out slide-out-to-top-4 duration-300' : 'animate-in slide-in-from-bottom-4 duration-500 delay-700'
-                        }`}>
-                          <Code className="h-7 w-7 text-teal-600 mr-3" />
-                          Technologies We Use
-                        </h3>
-                        <div className="flex flex-wrap gap-3">
-                          {selectedService.technologies.map((tech, index) => (
-                            <span 
-                              key={index} 
-                              className={`px-4 py-2 bg-teal-100 dark:bg-teal-900/30 text-teal-800 dark:text-teal-200 rounded-full text-sm font-medium hover:scale-105 transition-all duration-300 cursor-default ${
-                                isClosing ? 'animate-out zoom-out-95 duration-300' : 'animate-in zoom-in-95 duration-500'
-                              }`}
-                              style={{ 
-                                animationDelay: isClosing ? `${index * 30}ms` : `${800 + index * 50}ms` 
-                              }}
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Process */}
-                      <div>
-                        <h3 className={`text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center transition-all duration-300 ${
-                          isClosing ? 'animate-out slide-out-to-top-4 duration-300' : 'animate-in slide-in-from-bottom-4 duration-500 delay-900'
-                        }`}>
-                          <Clock className="h-7 w-7 text-cyan-600 mr-3" />
-                          Our Process
-                        </h3>
-                        <div className="space-y-6">
-                          {selectedService.process.map((step, index) => (
-                            <div 
-                              key={index} 
-                              className={`flex items-start p-4 bg-cyan-50 dark:bg-cyan-900/20 rounded-lg border-l-4 border-cyan-500 transition-all duration-300 hover:scale-105 ${
-                                isClosing ? 'animate-out slide-out-to-top-4 duration-300' : 'animate-in slide-in-from-bottom-4 duration-500'
-                              }`}
-                              style={{ 
-                                animationDelay: isClosing ? `${index * 75}ms` : `${1000 + index * 150}ms` 
-                              }}
-                            >
-                              <div className="w-10 h-10 bg-cyan-500 text-white rounded-full flex items-center justify-center font-bold text-sm mr-4 flex-shrink-0 shadow-lg">
-                                {index + 1}
-                              </div>
-                              <div>
-                                <h4 className="font-semibold text-gray-900 dark:text-white mb-2 text-lg">{step.step}</h4>
-                                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{step.description}</p>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* CTA */}
-                  <div className={`mt-12 text-center transition-all duration-300 ${
-                    isClosing ? 'animate-out slide-out-to-bottom-4 duration-300' : 'animate-in slide-in-from-bottom-4 duration-500 delay-1100'
-                  }`}>
-                    <div className={`bg-gradient-to-r ${selectedService.gradient} rounded-2xl p-8 text-white relative overflow-hidden group hover:shadow-2xl hover:shadow-blue-500/25 transition-all duration-500`}>
-                      <div className="absolute inset-0 bg-gradient-to-r from-teal-700 to-cyan-700 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                      <div className="relative z-10">
-                        <h3 className="text-3xl font-bold mb-4">Ready to Get Started?</h3>
-                        <p className="text-blue-100 mb-6 text-lg">Let's discuss your project and create a custom solution for your business.</p>
-                        <button 
-                          onClick={handleConsultation}
-                          className="bg-white text-teal-600 px-8 py-4 rounded-xl font-semibold hover:shadow-lg hover:-translate-y-1 transition-all duration-300 hover:scale-105 relative overflow-hidden group/cta text-lg"
-                        >
-                          <div className="absolute inset-0 bg-teal-50 opacity-0 group-hover/cta:opacity-100 transition-opacity duration-300"></div>
-                          <span className="relative z-10">Schedule a Consultation</span>
-                        </button>
-                      </div>
-                    </div>
+                  <div>
+                    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
+                      {selectedService.title}
+                    </h3>
+                    <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">
+                      {selectedService.shortDescription}
+                    </p>
                   </div>
                 </div>
+                <button
+                  onClick={() => setIsClosing(true)}
+                  className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors duration-200"
+                >
+                  <X className="h-5 w-5 sm:h-6 sm:w-6 text-gray-500 dark:text-gray-400" />
+                </button>
+              </div>
+
+              {/* Modal Content */}
+              <div className="space-y-6 sm:space-y-8">
+                {/* Description */}
+                <div>
+                  <h4 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-3">Overview</h4>
+                  <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+                    {selectedService.description}
+                  </p>
+                </div>
+
+                {/* Features and Benefits */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+                  <div>
+                    <h4 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+                      <CheckCircle className="h-5 w-5 text-teal-600 dark:text-teal-400 mr-2" />
+                      Key Features
+                    </h4>
+                    <ul className="space-y-2">
+                      {selectedService.features.map((feature, index) => (
+                        <li key={index} className="flex items-start text-sm sm:text-base text-gray-600 dark:text-gray-300">
+                          <div className="w-1.5 h-1.5 bg-teal-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+                      <TrendingUp className="h-5 w-5 text-teal-600 dark:text-teal-400 mr-2" />
+                      Benefits
+                    </h4>
+                    <ul className="space-y-2">
+                      {selectedService.benefits.map((benefit, index) => (
+                        <li key={index} className="flex items-start text-sm sm:text-base text-gray-600 dark:text-gray-300">
+                          <div className="w-1.5 h-1.5 bg-teal-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                          {benefit}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Technologies */}
+                <div>
+                  <h4 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+                    <Code className="h-5 w-5 text-teal-600 dark:text-teal-400 mr-2" />
+                    Technologies We Use
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedService.technologies.map((tech, index) => (
+                      <span
+                        key={index}
+                        className="px-3 py-1 bg-teal-100 dark:bg-teal-900/30 text-teal-800 dark:text-teal-300 text-xs sm:text-sm rounded-full font-medium"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Process */}
+                <div>
+                  <h4 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+                    <Clock className="h-5 w-5 text-teal-600 dark:text-teal-400 mr-2" />
+                    Our Process
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    {selectedService.process.map((step, index) => (
+                      <div key={index} className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+                        <div className="w-8 h-8 bg-teal-600 dark:bg-teal-500 text-white rounded-full flex items-center justify-center text-sm font-bold mb-3">
+                          {index + 1}
+                        </div>
+                        <h5 className="font-semibold text-gray-900 dark:text-white text-sm sm:text-base mb-2">
+                          {step.step}
+                        </h5>
+                        <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">
+                          {step.description}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Modal Footer */}
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                <button
+                  onClick={scrollToContact}
+                  className={`flex-1 bg-gradient-to-r ${selectedService.gradient} text-white px-6 py-3 rounded-lg font-semibold text-sm sm:text-base hover:shadow-lg hover:-translate-y-1 transition-all duration-200`}
+                >
+                  Start Your Project
+                </button>
+                <button
+                  onClick={() => setIsClosing(true)}
+                  className="flex-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-6 py-3 rounded-lg font-semibold text-sm sm:text-base hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+                >
+                  Close
+                </button>
               </div>
             </div>
           </div>
         </div>
       )}
-    </>
+    </section>
   );
 };
 
