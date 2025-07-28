@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -54,18 +54,32 @@ const HomePage = () => {
   );
 };
 
+// Layout component that conditionally renders Header and Footer
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+
+  return (
+    <>
+      {isHomePage && <Header />}
+      {children}
+      {isHomePage && <Footer />}
+    </>
+  );
+};
+
 function App() {
   return (
     <ThemeProvider>
       <PerformanceOptimizer />
       <Router>
-        <Header />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/terms" element={<TermsOfService />} />
-          <Route path="/privacy" element={<PrivacyPolicy />} />
-        </Routes>
-        <Footer />
+        <Layout>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/terms" element={<TermsOfService />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+          </Routes>
+        </Layout>
       </Router>
     </ThemeProvider>
   );
