@@ -34,7 +34,7 @@ const Portfolio = () => {
       title: 'LOOP: Point of Sale System with Integrated ERP System',
       category: 'SaaS Solution',
       description: 'A custom-built Point of Sale Software for restaurant businesses, fully automated and integrated with an ERP system. Delivered as a SaaS solution for seamless business operations.',
-      image: '/src/images/loop.png',
+      image: '/src/images/loop.webp',
       technologies: ['React', 'Next.js', 'Node.js', 'TypeScript', 'PostgreSQL', 'GraphQL', 'AWS', 'Docker', 'ERP Integration', 'SaaS'],
       results: ['Automated restaurant operations', 'Cloud-based SaaS delivery', 'Custom ERP integration']
     },
@@ -42,7 +42,7 @@ const Portfolio = () => {
       title: 'Muawin',
       category: 'Full-Stack Application',
       description: 'A regional-based file management system with multi-branch and zone support, integrated with a robust task management system. Built for a company to streamline operations across multiple locations.',
-      image: '/src/images/muawin.png',
+      image: '/src/images/muawin.webp',
       technologies: ['Vue.js', 'Nuxt.js', 'Node.js', 'Express.js', 'MongoDB', 'Redis', 'Socket.io', 'File Management', 'Task Management'],
       results: ['Centralized file management', 'Multi-branch support', 'Integrated task workflows']
     },
@@ -50,7 +50,7 @@ const Portfolio = () => {
       title: 'Slack to Google Sheets Automation',
       category: 'n8n Automation',
       description: 'Automated workflow using n8n to capture Slack messages and log them into Google Sheets for real-time team reporting and analytics.',
-      image: '/src/images/slack.png',
+      image: '/src/images/slack.webp',
       technologies: ['n8n', 'Slack API', 'Google Sheets API', 'JavaScript', 'Python', 'Webhooks', 'Automation'],
       results: ['Real-time message logging', 'Automated reporting', 'No manual data entry']
     },
@@ -58,7 +58,7 @@ const Portfolio = () => {
       title: 'Inventory Management Platform',
       category: 'Full-Stack Solution',
       description: 'A scalable inventory management platform with real-time stock tracking, supplier management, and analytics dashboard.',
-      image: '/src/images/inventory_management.png',
+      image: '/src/images/inventory_management.webp',
       technologies: ['React', 'Next.js', 'Node.js', 'TypeScript', 'MongoDB', 'Express.js', 'AWS S3', 'Redis', 'JWT'],
       results: ['Live stock updates', 'Supplier integration', 'Actionable analytics']
     },
@@ -66,7 +66,7 @@ const Portfolio = () => {
       title: 'Email Parser to CRM Automation',
       category: 'n8n Automation',
       description: 'n8n workflow that parses incoming emails and automatically creates or updates leads in a CRM system, saving hours of manual entry.',
-      image: '/src/images/email_parser.png',
+      image: '/src/images/email_parser.webp',
       technologies: ['n8n', 'IMAP', 'CRM API', 'Python', 'Machine Learning', 'NLP', 'Automation'],
       results: ['Automated lead creation', 'Zero manual input', 'Faster response times']
     },
@@ -74,7 +74,7 @@ const Portfolio = () => {
       title: 'Social Media Scheduler Automation',
       category: 'n8n Automation',
       description: 'A workflow built in n8n to schedule and post content across multiple social media platforms automatically, improving marketing efficiency.',
-      image: '/src/images/social_media_manager.png',
+      image: '/src/images/social_media_manager.webp',
       technologies: ['n8n', 'Twitter API', 'Facebook API', 'Instagram API', 'LinkedIn API', 'Python', 'Automation'],
       results: ['Consistent posting', 'Multi-platform support', 'Time savings for marketing teams']
     }
