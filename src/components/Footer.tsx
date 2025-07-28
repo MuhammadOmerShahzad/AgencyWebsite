@@ -25,9 +25,8 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { icon: Github, href: '#', label: 'GitHub' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
-    { icon: Twitter, href: '#', label: 'Twitter' }
+    { icon: Linkedin, href: 'https://www.linkedin.com/company/codbyt/?viewAsMember=true', label: 'LinkedIn' },
+    { icon: Twitter, href: 'https://x.com/CodBytt', label: 'X' }
   ];
 
   return (

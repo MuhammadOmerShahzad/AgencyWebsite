@@ -14,7 +14,7 @@ import PerformanceOptimizer from './components/PerformanceOptimizer';
 import SEOAnalysis from './components/SEOAnalysis';
 
 function App() {
-  const pageTitle = "Transform Your Business with CodByt Solutions";
+  const pageTitle = "CodByt Solutions";
   const pageDescription = "Leading IT SaaS & Automation Agency specializing in SaaS development, automation workflows, and full-stack applications. Transform your business with cutting-edge technology solutions.";
   const pageKeywords = ['SaaS', 'Automation', 'Full-Stack', 'Web Development', 'IT Solutions'];
 

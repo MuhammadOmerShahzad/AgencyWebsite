@@ -7,7 +7,7 @@ const TermsOfService = () => {
   return (
     <>
       <SEO 
-        title="Terms of Service"
+        title="CodByt Solutions"
         description="Read CodByt's terms of service to understand the terms and conditions governing the use of our services, website, and software solutions."
         keywords="terms of service, terms and conditions, legal terms, CodByt terms, service agreement"
         url="https://codbyt.com/terms"

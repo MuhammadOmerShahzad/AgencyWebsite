@@ -7,7 +7,7 @@ const PrivacyPolicy = () => {
   return (
     <>
       <SEO 
-        title="Privacy Policy"
+        title="CodByt Solutions"
         description="Learn about how CodByt collects, uses, and protects your personal information. Read our comprehensive privacy policy to understand your rights and our data practices."
         keywords="privacy policy, data protection, personal information, GDPR, data privacy, CodByt privacy"
         url="https://codbyt.com/privacy"
