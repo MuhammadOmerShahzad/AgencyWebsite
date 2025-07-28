@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Services from './components/Services';
 import Portfolio from './components/Portfolio';
+import Testimonials from './components/Testimonials';
 import Blog from './components/Blog';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -26,28 +27,28 @@ function App() {
         description={pageDescription}
         keywords="SaaS development, business automation, full-stack development, web development, IT solutions, React, Node.js, TypeScript, automation workflows"
         url="https://codbyt.com"
-        tags={pageKeywords}
+        type="website"
+        tags={['SaaS', 'Automation', 'Full-Stack', 'Web Development', 'IT Solutions']}
       />
-      <StructuredData type="Organization" data={OrganizationData} />
-      <StructuredData type="WebSite" data={WebSiteData} />
-      <StructuredData type="Service" data={ServiceData} />
       <SEOAnalysis 
         pageTitle={pageTitle}
         pageDescription={pageDescription}
         pageKeywords={pageKeywords}
       />
-      <div className="min-h-screen bg-white dark:bg-black">
-        <Header />
-        <main>
-          <Hero />
-          <About />
-          <Services />
-          <Portfolio />
-          <Blog />
-          <Contact />
-        </main>
-        <Footer />
-      </div>
+      <StructuredData type="Organization" data={OrganizationData} />
+      <StructuredData type="WebSite" data={WebSiteData} />
+      <StructuredData type="Service" data={ServiceData} />
+      <Header />
+      <main>
+        <Hero />
+        <About />
+        <Services />
+        <Portfolio />
+        <Testimonials />
+        <Blog />
+        <Contact />
+      </main>
+      <Footer />
     </ThemeProvider>
   );
 }
