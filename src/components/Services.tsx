@@ -22,6 +22,13 @@ const Services = () => {
   const [isClosing, setIsClosing] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
+  const scrollToContact = () => {
+    const element = document.getElementById('contact');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   // Memoize services data to prevent recreation on every render
   const services: Service[] = useMemo(() => [
     {
@@ -334,7 +341,10 @@ const Services = () => {
               <div className="relative z-10">
                 <h3 className="text-3xl font-bold mb-4">Ready to Transform Your Business?</h3>
                                   <p className="text-xl mb-6 text-teal-100 dark:text-teal-200">Let's discuss how our solutions can drive your success forward.</p>
-                <button className="bg-white dark:bg-gray-900 text-teal-600 dark:text-teal-400 px-8 py-3 rounded-lg font-semibold hover:shadow-lg hover:-translate-y-1 transition-all duration-150 ease-out relative overflow-hidden group/cta">
+                <button 
+                  onClick={scrollToContact}
+                  className="bg-white dark:bg-gray-900 text-teal-600 dark:text-teal-400 px-8 py-3 rounded-lg font-semibold hover:shadow-lg hover:-translate-y-1 transition-all duration-150 ease-out relative overflow-hidden group/cta"
+                >
                   <div className="absolute inset-0 bg-teal-50 dark:bg-gray-800 opacity-0 group-hover/cta:opacity-100 transition-opacity duration-150 ease-out"></div>
                   <span className="relative z-10">Get Started Today</span>
                 </button>

@@ -35,7 +35,7 @@ const Portfolio = () => {
       category: 'SaaS Solution',
       description: 'A custom-built Point of Sale Software for restaurant businesses, fully automated and integrated with an ERP system. Delivered as a SaaS solution for seamless business operations.',
       image: '/src/images/loop.png',
-      technologies: ['React', 'Node.js', 'ERP Integration', 'SaaS'],
+      technologies: ['React', 'Next.js', 'Node.js', 'TypeScript', 'PostgreSQL', 'GraphQL', 'AWS', 'Docker', 'ERP Integration', 'SaaS'],
       results: ['Automated restaurant operations', 'Cloud-based SaaS delivery', 'Custom ERP integration']
     },
     {
@@ -43,7 +43,7 @@ const Portfolio = () => {
       category: 'Full-Stack Application',
       description: 'A regional-based file management system with multi-branch and zone support, integrated with a robust task management system. Built for a company to streamline operations across multiple locations.',
       image: '/src/images/muawin.png',
-      technologies: ['React', 'Node.js', 'File Management', 'Task Management'],
+      technologies: ['Vue.js', 'Nuxt.js', 'Node.js', 'Express.js', 'MongoDB', 'Redis', 'Socket.io', 'File Management', 'Task Management'],
       results: ['Centralized file management', 'Multi-branch support', 'Integrated task workflows']
     },
     {
@@ -51,7 +51,7 @@ const Portfolio = () => {
       category: 'n8n Automation',
       description: 'Automated workflow using n8n to capture Slack messages and log them into Google Sheets for real-time team reporting and analytics.',
       image: '/src/images/slack.png',
-      technologies: ['n8n', 'Slack API', 'Google Sheets API', 'Automation'],
+      technologies: ['n8n', 'Slack API', 'Google Sheets API', 'JavaScript', 'Python', 'Webhooks', 'Automation'],
       results: ['Real-time message logging', 'Automated reporting', 'No manual data entry']
     },
     {
@@ -59,7 +59,7 @@ const Portfolio = () => {
       category: 'Full-Stack Solution',
       description: 'A scalable inventory management platform with real-time stock tracking, supplier management, and analytics dashboard.',
       image: '/src/images/inventory_management.png',
-      technologies: ['React', 'Node.js', 'MongoDB', 'Express'],
+      technologies: ['React', 'Next.js', 'Node.js', 'TypeScript', 'MongoDB', 'Express.js', 'AWS S3', 'Redis', 'JWT'],
       results: ['Live stock updates', 'Supplier integration', 'Actionable analytics']
     },
     {
@@ -67,7 +67,7 @@ const Portfolio = () => {
       category: 'n8n Automation',
       description: 'n8n workflow that parses incoming emails and automatically creates or updates leads in a CRM system, saving hours of manual entry.',
       image: '/src/images/email_parser.png',
-      technologies: ['n8n', 'IMAP', 'CRM API', 'Automation'],
+      technologies: ['n8n', 'IMAP', 'CRM API', 'Python', 'Machine Learning', 'NLP', 'Automation'],
       results: ['Automated lead creation', 'Zero manual input', 'Faster response times']
     },
     {
@@ -75,7 +75,7 @@ const Portfolio = () => {
       category: 'n8n Automation',
       description: 'A workflow built in n8n to schedule and post content across multiple social media platforms automatically, improving marketing efficiency.',
       image: '/src/images/social_media_manager.png',
-      technologies: ['n8n', 'Twitter API', 'Facebook API', 'Automation'],
+      technologies: ['n8n', 'Twitter API', 'Facebook API', 'Instagram API', 'LinkedIn API', 'Python', 'Automation'],
       results: ['Consistent posting', 'Multi-platform support', 'Time savings for marketing teams']
     }
   ];
@@ -108,14 +108,6 @@ const Portfolio = () => {
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
-                <div className="absolute top-4 right-4 flex space-x-2 opacity-0 group-hover:opacity-100 transition-all duration-200 delay-100">
-                  <button className="bg-white/20 dark:bg-gray-800/40 backdrop-blur-sm p-2 rounded-lg hover:bg-white/30 dark:hover:bg-gray-700/60 hover:scale-110 transition-all duration-150">
-                    <ExternalLink className="h-4 w-4 text-white hover:scale-110 transition-transform duration-150" />
-                  </button>
-                  <button className="bg-white/20 dark:bg-gray-800/40 backdrop-blur-sm p-2 rounded-lg hover:bg-white/30 dark:hover:bg-gray-700/60 hover:scale-110 transition-all duration-150">
-                    <Github className="h-4 w-4 text-white hover:scale-110 transition-transform duration-150" />
-                  </button>
-                </div>
                 </div>
               </div>
               <div className="p-6">
@@ -152,6 +144,27 @@ const Portfolio = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* And Many More Modal */}
+        <div className={`text-center mb-12 transition-transform duration-300 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="bg-gradient-to-r from-gray-800 to-gray-900 dark:from-gray-900 dark:to-black rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:shadow-teal-500/25 transition-all duration-500 group cursor-pointer">
+            <div className="text-white">
+              <h3 className="text-3xl font-bold mb-4 group-hover:scale-105 transition-transform duration-300 text-white">
+                And Many More Projects Done
+              </h3>
+              <p className="text-xl mb-6 group-hover:opacity-100 transition-opacity duration-300 text-white">
+                These are just a glimpse of our work. We've successfully delivered countless projects across various industries and technologies.
+              </p>
+              <div className="flex justify-center space-x-4 text-sm group-hover:opacity-100 transition-opacity duration-300">
+                <span className="bg-teal-500/80 px-3 py-1 rounded-full text-white font-medium">E-commerce</span>
+                <span className="bg-teal-500/80 px-3 py-1 rounded-full text-white font-medium">Healthcare</span>
+                <span className="bg-teal-500/80 px-3 py-1 rounded-full text-white font-medium">Finance</span>
+                <span className="bg-teal-500/80 px-3 py-1 rounded-full text-white font-medium">Education</span>
+                <span className="bg-teal-500/80 px-3 py-1 rounded-full text-white font-medium">Manufacturing</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* CTA Section */}

@@ -27,9 +27,9 @@ const About = () => {
           };
           
           setTimeout(() => {
-            animateCounter(150, 'clients');
-            animateCounter(200, 'projects');
-            animateCounter(99, 'success');
+            animateCounter(45, 'clients');
+            animateCounter(67, 'projects');
+            animateCounter(94, 'success');
           }, 500);
         }
       },
