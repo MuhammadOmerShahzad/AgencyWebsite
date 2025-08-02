@@ -17,6 +17,7 @@ import PerformanceOptimizer from './components/PerformanceOptimizer';
 import SEOAnalysis from './components/SEOAnalysis';
 import TermsOfService from './TermsOfService';
 import PrivacyPolicy from './PrivacyPolicy';
+import ScrollToTop from './components/ScrollToTop';
 
 // Memoized Home page component
 const HomePage = memo(() => {
@@ -80,6 +81,7 @@ function App() {
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
           </Routes>
+          <ScrollToTop />
         </Layout>
       </Router>
     </ThemeProvider>
