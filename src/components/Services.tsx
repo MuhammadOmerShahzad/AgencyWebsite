@@ -15,19 +15,215 @@ interface Service {
   gradient: string;
 }
 
+// Memoized Service Card Component
+const ServiceCard = React.memo(({ 
+  service, 
+  index, 
+  isVisible, 
+  onServiceClick 
+}: { 
+  service: Service; 
+  index: number; 
+  isVisible: boolean;
+  onServiceClick: (service: Service) => void;
+}) => (
+  <div 
+    data-service-id={service.id}
+    className={`group bg-white dark:bg-gray-900 rounded-2xl p-4 sm:p-6 lg:p-8 shadow-lg hover:shadow-2xl hover:shadow-teal-500/10 transition-all duration-150 ease-out hover:-translate-y-1 cursor-pointer relative overflow-hidden border border-gray-200 dark:border-gray-800 hover:border-teal-200 dark:hover:border-teal-700 touch-manipulation min-h-[200px] sm:min-h-[250px] ${
+      isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+    }`}
+    style={{ 
+      transitionDelay: `${index * 100}ms`,
+      transform: isVisible ? 'translateY(0)' : 'translateY(24px)'
+    }}
+    onClick={() => onServiceClick(service)}
+  >
+    <div className="absolute inset-0 bg-gradient-to-br from-teal-50/50 to-cyan-50/50 dark:from-gray-800/50 dark:to-gray-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-150 ease-out"></div>
+    <div className="relative z-10 h-full flex flex-col">
+      <div className={`w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r ${service.color} rounded-xl flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-150 ease-out`}>
+        <service.icon className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
+      </div>
+      <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-150 ease-out">{service.title}</h3>
+      <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-4 sm:mb-6 leading-relaxed flex-grow">{service.shortDescription}</p>
+      <ul className="space-y-1 sm:space-y-2 mb-4 sm:mb-6">
+        {service.features.slice(0, 3).map((feature, featureIndex) => (
+          <li key={featureIndex} className="flex items-center text-gray-700 dark:text-gray-200 text-xs sm:text-sm">
+            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-teal-500 rounded-full mr-2 sm:mr-3 group-hover:bg-cyan-500 transition-colors duration-150 ease-out flex-shrink-0"></div>
+            <span className="line-clamp-2">{feature}</span>
+          </li>
+        ))}
+      </ul>
+      <div className="inline-flex items-center text-teal-600 dark:text-teal-400 font-semibold hover:text-teal-700 dark:hover:text-teal-300 transition-all duration-150 ease-out group/btn hover:scale-105 mt-auto">
+        <span className="text-xs sm:text-sm">Learn More</span>
+        <ArrowRight className="ml-2 h-3 w-3 sm:h-4 sm:w-4 group-hover/btn:translate-x-1 transition-transform duration-150 ease-out" />
+      </div>
+    </div>
+  </div>
+));
+
+// Memoized Modal Component
+const ServiceModal = React.memo(({ 
+  service, 
+  isOpen, 
+  isClosing, 
+  onClose, 
+  onContact 
+}: { 
+  service: Service | null; 
+  isOpen: boolean; 
+  isClosing: boolean;
+  onClose: () => void;
+  onContact: () => void;
+}) => {
+  if (!service || !isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4">
+      <div 
+        className={`absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ${
+          isClosing ? 'opacity-0' : 'opacity-100'
+        }`}
+        onClick={onClose}
+      />
+      <div className={`relative bg-white dark:bg-gray-900 rounded-2xl shadow-2xl max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto transition-all duration-300 ${
+        isClosing ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
+      }`}>
+        <div className="p-4 sm:p-6 lg:p-8">
+          {/* Modal Header */}
+          <div className="flex items-start justify-between mb-4 sm:mb-6">
+            <div className="flex items-center space-x-3 sm:space-x-4">
+              <div className={`w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-gradient-to-r ${service.color} rounded-xl flex items-center justify-center`}>
+                <service.icon className="h-5 w-5 sm:h-6 sm:w-6 lg:h-8 lg:w-8 text-white" />
+              </div>
+              <div>
+                <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white">
+                  {service.title}
+                </h3>
+                <p className="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-300">
+                  {service.shortDescription}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onClose}
+              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors duration-200 touch-manipulation min-h-[44px] min-w-[44px] flex items-center justify-center"
+            >
+              <X className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6 text-gray-500 dark:text-gray-400" />
+            </button>
+          </div>
+
+          {/* Modal Content */}
+          <div className="space-y-4 sm:space-y-6 lg:space-y-8">
+            {/* Description */}
+            <div>
+              <h4 className="text-base sm:text-lg lg:text-xl font-semibold text-gray-900 dark:text-white mb-2 sm:mb-3">Overview</h4>
+              <p className="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+                {service.description}
+              </p>
+            </div>
+
+            {/* Features and Benefits */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+              <div>
+                <h4 className="text-base sm:text-lg lg:text-xl font-semibold text-gray-900 dark:text-white mb-3 sm:mb-4 flex items-center">
+                  <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-teal-600 dark:text-teal-400 mr-2" />
+                  Key Features
+                </h4>
+                <ul className="space-y-1 sm:space-y-2">
+                  {service.features.map((feature, index) => (
+                    <li key={index} className="flex items-start text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-300">
+                      <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-teal-500 rounded-full mt-1.5 sm:mt-2 mr-2 sm:mr-3 flex-shrink-0"></div>
+                      <span className="line-clamp-2">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h4 className="text-base sm:text-lg lg:text-xl font-semibold text-gray-900 dark:text-white mb-3 sm:mb-4 flex items-center">
+                  <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-teal-600 dark:text-teal-400 mr-2" />
+                  Benefits
+                </h4>
+                <ul className="space-y-1 sm:space-y-2">
+                  {service.benefits.map((benefit, index) => (
+                    <li key={index} className="flex items-start text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-300">
+                      <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-teal-500 rounded-full mt-1.5 sm:mt-2 mr-2 sm:mr-3 flex-shrink-0"></div>
+                      <span className="line-clamp-2">{benefit}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Technologies */}
+            <div>
+              <h4 className="text-base sm:text-lg lg:text-xl font-semibold text-gray-900 dark:text-white mb-3 sm:mb-4 flex items-center">
+                <Code className="h-4 w-4 sm:h-5 sm:w-5 text-teal-600 dark:text-teal-400 mr-2" />
+                Technologies We Use
+              </h4>
+              <div className="flex flex-wrap gap-1 sm:gap-2">
+                {service.technologies.map((tech, index) => (
+                  <span
+                    key={index}
+                    className="px-2 py-1 bg-teal-100 dark:bg-teal-900/30 text-teal-800 dark:text-teal-300 text-xs sm:text-sm rounded-full font-medium"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Process */}
+            <div>
+              <h4 className="text-base sm:text-lg lg:text-xl font-semibold text-gray-900 dark:text-white mb-3 sm:mb-4 flex items-center">
+                <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-teal-600 dark:text-teal-400 mr-2" />
+                Our Process
+              </h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                {service.process.map((step, index) => (
+                  <div key={index} className="bg-gray-50 dark:bg-gray-800 p-3 sm:p-4 rounded-lg">
+                    <div className="w-6 h-6 sm:w-8 sm:h-8 bg-teal-600 dark:bg-teal-500 text-white rounded-full flex items-center justify-center text-xs sm:text-sm font-bold mb-2 sm:mb-3">
+                      {index + 1}
+                    </div>
+                    <h5 className="font-semibold text-gray-900 dark:text-white text-xs sm:text-sm lg:text-base mb-1 sm:mb-2">
+                      {step.step}
+                    </h5>
+                    <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 line-clamp-3">
+                      {step.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Modal Footer */}
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 lg:gap-4 mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-200 dark:border-gray-700">
+            <button
+              onClick={onContact}
+              className={`flex-1 bg-gradient-to-r ${service.gradient} text-white px-4 sm:px-6 py-3 rounded-lg font-semibold text-sm sm:text-base hover:shadow-lg hover:-translate-y-1 transition-all duration-200 touch-manipulation min-h-[44px]`}
+            >
+              Start Your Project
+            </button>
+            <button
+              onClick={onClose}
+              className="flex-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-4 sm:px-6 py-3 rounded-lg font-semibold text-sm sm:text-base hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 touch-manipulation min-h-[44px]"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+});
+
 const Services = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
-
-  const scrollToContact = () => {
-    const element = document.getElementById('contact');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
   // Memoize services data to prevent recreation on every render
   const services: Service[] = useMemo(() => [
@@ -218,27 +414,44 @@ const Services = () => {
     }
   ], []);
 
-  // Optimized intersection observer
+  // Optimized intersection observer with cleanup
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+    }
+
+    observerRef.current = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && !isVisible) {
           setIsVisible(true);
           // Disconnect after first trigger to prevent unnecessary re-triggers
-          observer.disconnect();
+          if (observerRef.current) {
+            observerRef.current.disconnect();
+          }
         }
       },
       { threshold: 0.1, rootMargin: '50px' }
     );
 
     if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+      observerRef.current.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect();
-  }, []);
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+  }, [isVisible]);
 
   // Memoized callbacks to prevent unnecessary re-renders
+  const scrollToContact = useCallback(() => {
+    const element = document.getElementById('contact');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
+
   const openModal = useCallback((service: Service) => {
     setSelectedService(service);
     setIsModalOpen(true);
@@ -277,98 +490,44 @@ const Services = () => {
     }, 100);
   }, [closeModal]);
 
-  // Memoized service cards to prevent unnecessary re-renders
-  const ServiceCard = React.memo(({ service, index }: { service: Service; index: number }) => (
-    <div 
-      data-service-id={service.id}
-      className={`group bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg hover:shadow-2xl hover:shadow-teal-500/10 transition-all duration-150 ease-out hover:-translate-y-1 cursor-pointer relative overflow-hidden border border-gray-200 dark:border-gray-800 hover:border-teal-200 dark:hover:border-teal-700 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-      }`}
-      style={{ 
-        transitionDelay: `${index * 100}ms`,
-        transform: isVisible ? 'translateY(0)' : 'translateY(24px)'
-      }}
-      onClick={() => openModal(service)}
-    >
-      <div className="absolute inset-0 bg-gradient-to-br from-teal-50/50 to-cyan-50/50 dark:from-gray-800/50 dark:to-gray-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-150 ease-out"></div>
-      <div className="relative z-10">
-        <div className={`w-16 h-16 bg-gradient-to-r ${service.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-150 ease-out`}>
-          <service.icon className="h-8 w-8 text-white" />
-        </div>
-        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-150 ease-out">{service.title}</h3>
-        <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">{service.shortDescription}</p>
-        <ul className="space-y-2 mb-6">
-          {service.features.slice(0, 4).map((feature, featureIndex) => (
-            <li key={featureIndex} className="flex items-center text-gray-700 dark:text-gray-200">
-              <div className="w-2 h-2 bg-teal-500 rounded-full mr-3 group-hover:bg-cyan-500 transition-colors duration-150 ease-out"></div>
-              {feature}
-            </li>
-          ))}
-        </ul>
-        <div className="inline-flex items-center text-teal-600 dark:text-teal-400 font-semibold hover:text-teal-700 dark:hover:text-teal-300 transition-all duration-150 ease-out group/btn hover:scale-105">
-          Learn More
-          <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-150 ease-out" />
-        </div>
-      </div>
-    </div>
-  ));
-
   return (
-    <section ref={sectionRef} id="services" className="py-16 sm:py-20 bg-white dark:bg-black">
+    <section ref={sectionRef} id="services" className="py-12 sm:py-16 lg:py-20 bg-white dark:bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className={`text-center mb-12 sm:mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">
+        <div className={`text-center mb-8 sm:mb-12 lg:mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4 lg:mb-6">
             Our <span className="bg-gradient-to-r from-teal-500 to-cyan-500 bg-clip-text text-transparent dark:from-teal-400 dark:to-cyan-400">Services</span>
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Comprehensive IT solutions designed to transform your business operations and drive growth.
           </p>
         </div>
 
         {/* Services Grid */}
-        <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 lg:mb-16 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           {services.map((service, index) => (
-            <div
+            <ServiceCard
               key={service.id}
-              onClick={() => {
-                setSelectedService(service);
-                setIsModalOpen(true);
-              }}
-              className={`bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl hover:shadow-teal-500/10 transition-all duration-300 hover:-translate-y-2 hover:scale-105 cursor-pointer border border-gray-200 dark:border-gray-800 hover:border-teal-200 dark:hover:border-teal-700 group ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
-              style={{ transitionDelay: `${index * 100}ms` }}
-            >
-              <div className={`w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r ${service.color} rounded-xl flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                <service.icon className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
-              </div>
-              <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
-                {service.title}
-              </h3>
-              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
-                {service.shortDescription}
-              </p>
-              <div className="flex items-center mt-4 sm:mt-6 text-teal-600 dark:text-teal-400 group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors duration-300">
-                <span className="text-sm sm:text-base font-medium">Learn More</span>
-                <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-              </div>
-            </div>
+              service={service}
+              index={index}
+              isVisible={isVisible}
+              onServiceClick={openModal}
+            />
           ))}
         </div>
 
         {/* CTA Section */}
         <div className={`text-center transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <div className="bg-gradient-to-r from-teal-500 to-cyan-500 dark:from-teal-600 dark:to-cyan-600 rounded-2xl p-8 sm:p-12 shadow-xl">
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6">
+          <div className="bg-gradient-to-r from-teal-500 to-cyan-500 dark:from-teal-600 dark:to-cyan-600 rounded-2xl p-6 sm:p-8 lg:p-12 shadow-xl">
+            <h3 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-white mb-3 sm:mb-4 lg:mb-6">
               Ready to Transform Your Business?
             </h3>
-            <p className="text-base sm:text-lg text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base lg:text-lg text-white/90 mb-4 sm:mb-6 lg:mb-8 max-w-2xl mx-auto">
               Let's discuss your project and explore how our services can help you achieve your goals.
             </p>
             <button
               onClick={scrollToContact}
-              className="bg-white dark:bg-gray-900 text-teal-600 dark:text-teal-400 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-sm sm:text-base hover:shadow-lg hover:-translate-y-1 transition-all duration-150 ease-out relative overflow-hidden group/cta"
+              className="bg-white dark:bg-gray-900 text-teal-600 dark:text-teal-400 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 rounded-lg font-semibold text-sm sm:text-base lg:text-lg hover:shadow-lg hover:-translate-y-1 transition-all duration-150 ease-out relative overflow-hidden group/cta touch-manipulation min-h-[44px]"
             >
               <div className="absolute inset-0 bg-gray-100 dark:bg-gray-800 opacity-0 group-hover/cta:opacity-100 transition-opacity duration-200"></div>
               <span className="relative z-10">Get Started Today</span>
@@ -378,144 +537,13 @@ const Services = () => {
       </div>
 
       {/* Service Modal */}
-      {isModalOpen && selectedService && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div 
-            className={`absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ${
-              isClosing ? 'opacity-0' : 'opacity-100'
-            }`}
-            onClick={() => setIsClosing(true)}
-          />
-          <div className={`relative bg-white dark:bg-gray-900 rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto transition-all duration-300 ${
-            isClosing ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
-          }`}>
-            <div className="p-6 sm:p-8">
-              {/* Modal Header */}
-              <div className="flex items-start justify-between mb-6">
-                <div className="flex items-center space-x-4">
-                  <div className={`w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r ${selectedService.color} rounded-xl flex items-center justify-center`}>
-                    <selectedService.icon className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
-                      {selectedService.title}
-                    </h3>
-                    <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">
-                      {selectedService.shortDescription}
-                    </p>
-                  </div>
-                </div>
-                <button
-                  onClick={() => setIsClosing(true)}
-                  className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors duration-200"
-                >
-                  <X className="h-5 w-5 sm:h-6 sm:w-6 text-gray-500 dark:text-gray-400" />
-                </button>
-              </div>
-
-              {/* Modal Content */}
-              <div className="space-y-6 sm:space-y-8">
-                {/* Description */}
-                <div>
-                  <h4 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-3">Overview</h4>
-                  <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
-                    {selectedService.description}
-                  </p>
-                </div>
-
-                {/* Features and Benefits */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-                  <div>
-                    <h4 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                      <CheckCircle className="h-5 w-5 text-teal-600 dark:text-teal-400 mr-2" />
-                      Key Features
-                    </h4>
-                    <ul className="space-y-2">
-                      {selectedService.features.map((feature, index) => (
-                        <li key={index} className="flex items-start text-sm sm:text-base text-gray-600 dark:text-gray-300">
-                          <div className="w-1.5 h-1.5 bg-teal-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                      <TrendingUp className="h-5 w-5 text-teal-600 dark:text-teal-400 mr-2" />
-                      Benefits
-                    </h4>
-                    <ul className="space-y-2">
-                      {selectedService.benefits.map((benefit, index) => (
-                        <li key={index} className="flex items-start text-sm sm:text-base text-gray-600 dark:text-gray-300">
-                          <div className="w-1.5 h-1.5 bg-teal-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                          {benefit}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Technologies */}
-                <div>
-                  <h4 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                    <Code className="h-5 w-5 text-teal-600 dark:text-teal-400 mr-2" />
-                    Technologies We Use
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedService.technologies.map((tech, index) => (
-                      <span
-                        key={index}
-                        className="px-3 py-1 bg-teal-100 dark:bg-teal-900/30 text-teal-800 dark:text-teal-300 text-xs sm:text-sm rounded-full font-medium"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Process */}
-                <div>
-                  <h4 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                    <Clock className="h-5 w-5 text-teal-600 dark:text-teal-400 mr-2" />
-                    Our Process
-                  </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    {selectedService.process.map((step, index) => (
-                      <div key={index} className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
-                        <div className="w-8 h-8 bg-teal-600 dark:bg-teal-500 text-white rounded-full flex items-center justify-center text-sm font-bold mb-3">
-                          {index + 1}
-                        </div>
-                        <h5 className="font-semibold text-gray-900 dark:text-white text-sm sm:text-base mb-2">
-                          {step.step}
-                        </h5>
-                        <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">
-                          {step.description}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Modal Footer */}
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-                <button
-                  onClick={scrollToContact}
-                  className={`flex-1 bg-gradient-to-r ${selectedService.gradient} text-white px-6 py-3 rounded-lg font-semibold text-sm sm:text-base hover:shadow-lg hover:-translate-y-1 transition-all duration-200`}
-                >
-                  Start Your Project
-                </button>
-                <button
-                  onClick={() => setIsClosing(true)}
-                  className="flex-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-6 py-3 rounded-lg font-semibold text-sm sm:text-base hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <ServiceModal
+        service={selectedService}
+        isOpen={isModalOpen}
+        isClosing={isClosing}
+        onClose={closeModal}
+        onContact={handleConsultation}
+      />
     </section>
   );
 };

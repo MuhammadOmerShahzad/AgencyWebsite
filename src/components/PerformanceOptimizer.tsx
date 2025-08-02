@@ -1,51 +1,126 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 
-const PerformanceOptimizer: React.FC = () => {
-  return (
-    <Helmet>
-      {/* DNS Prefetch for external domains */}
-      <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-      <link rel="dns-prefetch" href="//fonts.gstatic.com" />
-      <link rel="dns-prefetch" href="//images.pexels.com" />
-      <link rel="dns-prefetch" href="//api.web3forms.com" />
+const PerformanceOptimizer = () => {
+  useEffect(() => {
+    // Preload critical resources
+    const preloadCriticalResources = () => {
+      // Preload critical images
+      const criticalImages = [
+        '/images/loop.webp',
+        '/images/muawin.webp',
+        '/images/slack.webp',
+        '/images/inventory_management.webp',
+        '/images/email_parser.webp',
+        '/images/social_media_manager.webp'
+      ];
+
+      criticalImages.forEach(src => {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = src;
+        document.head.appendChild(link);
+      });
+
+      // Preload critical fonts
+      const fontLink = document.createElement('link');
+      fontLink.rel = 'preload';
+      fontLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap';
+      fontLink.as = 'style';
+      document.head.appendChild(fontLink);
+    };
+
+    // Optimize scroll performance
+    const optimizeScrollPerformance = () => {
+      let ticking = false;
       
-      {/* Preconnect for critical resources */}
-      <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      <link rel="preconnect" href="https://images.pexels.com" crossOrigin="anonymous" />
-      <link rel="preconnect" href="https://api.web3forms.com" crossOrigin="anonymous" />
+      const updateScrollPosition = () => {
+        // Handle scroll-based animations efficiently
+        ticking = false;
+      };
+
+      const requestTick = () => {
+        if (!ticking) {
+          requestAnimationFrame(updateScrollPosition);
+          ticking = true;
+        }
+      };
+
+      window.addEventListener('scroll', requestTick, { passive: true });
       
-      {/* Preload critical fonts */}
-      <link 
-        rel="preload" 
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" 
-        as="style" 
-      />
+      return () => {
+        window.removeEventListener('scroll', requestTick);
+      };
+    };
+
+    // Optimize intersection observer performance
+    const optimizeIntersectionObserver = () => {
+      // Use a shared intersection observer for better performance
+      const sharedObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('animate-in');
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '50px'
+        }
+      );
+
+      // Observe all elements with data-observe attribute
+      const elementsToObserve = document.querySelectorAll('[data-observe]');
+      elementsToObserve.forEach(el => sharedObserver.observe(el));
+
+      return () => {
+        sharedObserver.disconnect();
+      };
+    };
+
+    // Optimize image loading
+    const optimizeImageLoading = () => {
+      const images = document.querySelectorAll('img[loading="lazy"]');
       
-      {/* Preload critical images */}
-      <link rel="preload" as="image" href="/src/images/codbyt_logo.png" />
-      
-      {/* Resource hints for better performance */}
-      <link rel="prefetch" href="/privacy" />
-      <link rel="prefetch" href="/terms" />
-      
-      {/* Performance optimizations */}
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-      <meta name="format-detection" content="telephone=no" />
-      <meta name="theme-color" content="#0d9488" />
-      <meta name="msapplication-TileColor" content="#0d9488" />
-      
-      {/* Security headers */}
-      <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
-      <meta httpEquiv="X-Frame-Options" content="DENY" />
-      <meta httpEquiv="X-XSS-Protection" content="1; mode=block" />
-      <meta httpEquiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
-      
-      {/* Cache control */}
-      <meta httpEquiv="Cache-Control" content="public, max-age=31536000, immutable" />
-    </Helmet>
-  );
+      if ('loading' in HTMLImageElement.prototype) {
+        // Browser supports native lazy loading
+        images.forEach(img => {
+          img.setAttribute('loading', 'lazy');
+        });
+      } else {
+        // Fallback for browsers that don't support lazy loading
+        const imageObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const img = entry.target as HTMLImageElement;
+              img.src = img.dataset.src || '';
+              imageObserver.unobserve(img);
+            }
+          });
+        });
+
+        images.forEach(img => {
+          imageObserver.observe(img);
+        });
+      }
+    };
+
+    // Initialize optimizations
+    preloadCriticalResources();
+    const scrollCleanup = optimizeScrollPerformance();
+    const observerCleanup = optimizeIntersectionObserver();
+    optimizeImageLoading();
+
+    // Cleanup on unmount
+    return () => {
+      scrollCleanup?.();
+      observerCleanup?.();
+    };
+  }, []);
+
+  return null; // This component doesn't render anything
 };
 
 export default PerformanceOptimizer; 

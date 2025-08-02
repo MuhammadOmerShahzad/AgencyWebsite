@@ -16,7 +16,8 @@ const Footer = () => {
     { name: 'Home', id: 'home' },
     { name: 'About', id: 'about' },
     { name: 'Services', id: 'services' },
-    { name: 'Portfolio', id: 'portfolio' }
+    { name: 'Portfolio', id: 'portfolio' },
+    { name: 'Contact', id: 'contact' }
   ];
 
   const services = [
@@ -79,22 +80,6 @@ const Footer = () => {
                   </button>
                 </li>
               ))}
-              <li>
-                <button
-                  onClick={() => scrollToSection('blog')}
-                  className="text-sm sm:text-base text-gray-300 dark:text-gray-400 hover:text-teal-400 dark:hover:text-teal-300 transition-all duration-300 hover:translate-x-2 hover:scale-105 transform inline-block"
-                >
-                  Blog
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection('contact')}
-                  className="text-sm sm:text-base text-gray-300 dark:text-gray-400 hover:text-teal-400 dark:hover:text-teal-300 transition-all duration-300 hover:translate-x-2 hover:scale-105 transform inline-block"
-                >
-                  Contact
-                </button>
-              </li>
             </ul>
           </div>
 

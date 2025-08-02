@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { ArrowRight, Sparkles, Zap, Globe, Code, Cloud, Database, Settings, Cpu, Server, Smartphone, Palette } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 
@@ -14,33 +14,47 @@ interface FloatingIcon {
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 100);
     return () => clearTimeout(timer);
   }, []);
 
+  // Detect mobile device
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
     };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const scrollToContact = () => {
+  // Optimized mouse/touch handling
+  useEffect(() => {
+    const handlePointerMove = (e: PointerEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    
+    window.addEventListener('pointermove', handlePointerMove);
+    return () => window.removeEventListener('pointermove', handlePointerMove);
+  }, []);
+
+  const scrollToContact = useCallback(() => {
     const element = document.getElementById('contact');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-  };
+  }, []);
 
-  const scrollToPortfolio = () => {
+  const scrollToPortfolio = useCallback(() => {
     const element = document.getElementById('portfolio');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-  };
+  }, []);
 
   const techIcons = [
     { Icon: Code, color: '#f15a22' },
@@ -54,14 +68,17 @@ const Hero = () => {
     { Icon: Palette, color: '#a78bfa' },
   ];
 
-  const MAX_ICONS = 12;
+  const MAX_ICONS = isMobile ? 6 : 12; // Reduce icons on mobile
   const ICON_LIFETIME = 2500; // ms
 
   const [floatingIcons, setFloatingIcons] = useState<FloatingIcon[]>([]);
   const iconId = useRef(0);
 
   function isInSafeZone(top: number, left: number) {
-    // Safe zone: top 22%-62%, left 18%-82% (center area for heading/buttons)
+    // Adjusted safe zone for mobile
+    if (isMobile) {
+      return top > 15 && top < 75 && left > 10 && left < 90;
+    }
     return top > 22 && top < 62 && left > 18 && left < 82;
   }
 
@@ -70,7 +87,8 @@ const Hero = () => {
     return arr.some(item => {
       const dist = Math.sqrt(Math.pow(item.top - top, 2) + Math.pow(item.left - left, 2));
       const sameType = item[typeKey] === typeValue;
-      return (dist < 10) || (sameType && Math.abs(item.top - top) < 2 && Math.abs(item.left - left) < 2);
+      const minDistance = isMobile ? 15 : 10; // Larger minimum distance on mobile
+      return (dist < minDistance) || (sameType && Math.abs(item.top - top) < 2 && Math.abs(item.left - left) < 2);
     });
   }
 
@@ -85,7 +103,7 @@ const Hero = () => {
         left = Math.random() * 80 + 5;
         tries++;
       } while ((isInSafeZone(top, left) || isTooClose(top, left, floatingIcons, 'Icon', Icon)) && tries < 10);
-      const size = Math.random() * 24 + 32;
+      const size = isMobile ? Math.random() * 16 + 20 : Math.random() * 24 + 32; // Smaller icons on mobile
       const id = iconId.current++;
       setFloatingIcons(prev => [
         ...prev,
@@ -94,9 +112,9 @@ const Hero = () => {
       setTimeout(() => {
         setFloatingIcons(prev => prev.filter(icon => icon.id !== id));
       }, ICON_LIFETIME);
-    }, 400);
+    }, isMobile ? 800 : 400); // Slower animation on mobile
     return () => clearInterval(interval);
-  }, [floatingIcons]);
+  }, [floatingIcons, isMobile]);
 
   const codeSnippets = [
     `const sum = (a, b) => a + b;`,
@@ -122,7 +140,7 @@ const Hero = () => {
     `const fn = () => {};`,
   ];
 
-  const MAX_SNIPPETS = 3;
+  const MAX_SNIPPETS = isMobile ? 2 : 3; // Reduce snippets on mobile
   const SNIPPET_LIFETIME = 3200;
 
   const snippetColors = [
@@ -149,16 +167,16 @@ const Hero = () => {
         left = Math.random() * 70 + 10;
         tries++;
       } while ((isInSafeZone(top, left) || isTooClose(top, left, typedSnippets, 'code', code)) && tries < 10);
-      const width = Math.random() * 40 + 120;
-      const fontSize = Math.random() * 2 + 13;
+      const width = isMobile ? Math.random() * 30 + 80 : Math.random() * 40 + 120; // Smaller width on mobile
+      const fontSize = isMobile ? Math.random() * 1 + 10 : Math.random() * 2 + 13; // Smaller font on mobile
       const id = typedSnippetId.current++;
       setTypedSnippets(prev => [
         ...prev,
         { id, code, shown: '', top, left, width, fontSize, color: snippetColors[Math.floor(Math.random() * snippetColors.length)] }
       ]);
-    }, 1200);
+    }, isMobile ? 2000 : 1200); // Slower on mobile
     return () => clearInterval(interval);
-  }, [typedSnippets]);
+  }, [typedSnippets, isMobile]);
 
   // Typing animation for each snippet
   useEffect(() => {
@@ -168,7 +186,7 @@ const Hero = () => {
           setTypedSnippets(prev => prev.map(s =>
             s.id === snippet.id ? { ...s, shown: snippet.code.slice(0, snippet.shown.length + 1) } : s
           ));
-        }, 30);
+        }, isMobile ? 50 : 30); // Slower typing on mobile
         return () => clearTimeout(timeout);
       } else {
         // Remove after SNIPPET_LIFETIME
@@ -178,10 +196,10 @@ const Hero = () => {
         return () => clearTimeout(timeout);
       }
     });
-  }, [typedSnippets]);
+  }, [typedSnippets, isMobile]);
 
   return (
-          <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-teal-50 to-cyan-50 dark:from-black dark:via-teal-900/20 dark:to-cyan-900/20 px-2 sm:px-4 pt-28 sm:pt-32">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-teal-50 to-cyan-50 dark:from-black dark:via-teal-900/20 dark:to-cyan-900/20 px-2 sm:px-4 pt-28 sm:pt-32">
       {/* Animated Tech Icons Background (dynamic) */}
       <div className="absolute inset-0 w-full h-full z-0 pointer-events-none select-none">
         {floatingIcons.map(icon => (
@@ -260,7 +278,7 @@ const Hero = () => {
           <div className={`flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8 sm:mb-10 lg:mb-16 transition-all duration-1000 delay-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <button 
               onClick={scrollToContact}
-              className="group w-full sm:w-auto bg-gradient-to-r from-teal-500 to-cyan-500 text-white px-4 sm:px-6 lg:px-8 py-3 sm:py-4 rounded-lg font-semibold text-sm sm:text-base lg:text-lg transition-all duration-200 hover:shadow-2xl hover:shadow-teal-500/25 hover:scale-105 hover:-translate-y-1 flex items-center justify-center space-x-2 relative overflow-hidden drop-shadow-lg"
+              className="group w-full sm:w-auto bg-gradient-to-r from-teal-500 to-cyan-500 text-white px-4 sm:px-6 lg:px-8 py-3 sm:py-4 rounded-lg font-semibold text-sm sm:text-base lg:text-lg transition-all duration-200 hover:shadow-2xl hover:shadow-teal-500/25 hover:scale-105 hover:-translate-y-1 flex items-center justify-center space-x-2 relative overflow-hidden drop-shadow-lg touch-manipulation min-h-[44px] sm:min-h-[48px]"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-teal-700 to-cyan-700 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
               <div className="relative z-10 flex items-center space-x-2">
@@ -269,7 +287,7 @@ const Hero = () => {
               </div>
             </button>
             
-            <button onClick={scrollToPortfolio} className="w-full sm:w-auto bg-white dark:bg-gray-900 border-2 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-200 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 rounded-lg font-semibold text-sm sm:text-base lg:text-lg hover:border-teal-600 hover:text-teal-600 dark:hover:text-teal-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 relative overflow-hidden group">
+            <button onClick={scrollToPortfolio} className="w-full sm:w-auto bg-white dark:bg-gray-900 border-2 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-200 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 rounded-lg font-semibold text-sm sm:text-base lg:text-lg hover:border-teal-600 hover:text-teal-600 dark:hover:text-teal-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 relative overflow-hidden group touch-manipulation min-h-[44px] sm:min-h-[48px]">
               <div className="absolute inset-0 bg-teal-50 dark:bg-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
               <span className="relative z-10">
               View Our Work
@@ -286,7 +304,7 @@ const Hero = () => {
             ].map((feature, index) => (
               <div 
                 key={index}
-                className={`bg-blue-50 dark:bg-gray-900/80 backdrop-blur-sm p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-200 hover:-translate-y-2 hover:scale-105 group cursor-pointer border border-blue-100 dark:border-gray-800 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                className={`bg-blue-50 dark:bg-gray-900/80 backdrop-blur-sm p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-200 hover:-translate-y-2 hover:scale-105 group cursor-pointer border border-blue-100 dark:border-gray-800 touch-manipulation ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                 style={{ transitionDelay: `${index * 200}ms` }}
               >
                 <feature.icon className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600 dark:text-blue-400 mb-3 sm:mb-4 mx-auto group-hover:scale-110 group-hover:text-purple-600 transition-all duration-300" />
@@ -300,7 +318,7 @@ const Hero = () => {
 
       {/* Scroll Indicator */}
       <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce transition-all duration-1000 delay-1500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="w-6 h-10 border-2 border-gray-400 dark:border-gray-600 rounded-full flex justify-center hover:border-blue-500 dark:hover:border-blue-400 transition-colors duration-300 cursor-pointer">
+        <div className="w-6 h-10 border-2 border-gray-400 dark:border-gray-600 rounded-full flex justify-center hover:border-blue-500 dark:hover:border-blue-400 transition-colors duration-300 cursor-pointer touch-manipulation">
           <div className="w-1 h-3 bg-gray-400 dark:bg-gray-600 rounded-full mt-2 animate-pulse hover:bg-blue-500 dark:hover:bg-blue-400 transition-colors duration-300"></div>
         </div>
       </div>

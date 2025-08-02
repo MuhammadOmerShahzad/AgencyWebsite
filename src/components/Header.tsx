@@ -14,7 +14,7 @@ const Header = () => {
       setIsScrolled(window.scrollY > 50);
       
       // Update active section based on scroll position
-      const sections = ['home', 'about', 'services', 'portfolio', 'blog', 'contact'];
+      const sections = ['home', 'about', 'services', 'portfolio', 'contact'];
       const current = sections.find(section => {
         const element = document.getElementById(section);
         if (element) {
@@ -29,7 +29,7 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const menuItems = ['Home', 'About', 'Services', 'Portfolio', 'Blog', 'Contact'];
+  const menuItems = ['Home', 'About', 'Services', 'Portfolio', 'Contact'];
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId.toLowerCase());

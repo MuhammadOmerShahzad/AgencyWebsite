@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
 import Services from './components/Services';
 import Portfolio from './components/Portfolio';
+import TrustedBy from './components/TrustedBy';
 import Testimonials from './components/Testimonials';
-import Blog from './components/Blog';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import { ThemeProvider } from './context/ThemeContext';
@@ -17,8 +17,8 @@ import SEOAnalysis from './components/SEOAnalysis';
 import TermsOfService from './TermsOfService';
 import PrivacyPolicy from './PrivacyPolicy';
 
-// Home page component
-const HomePage = () => {
+// Memoized Home page component
+const HomePage = memo(() => {
   const pageTitle = "CodByt Solutions";
   const pageDescription = "Leading IT SaaS & Automation Agency specializing in SaaS development, automation workflows, and full-stack applications. Transform your business with cutting-edge technology solutions.";
   const pageKeywords = ['SaaS', 'Automation', 'Full-Stack', 'Web Development', 'IT Solutions'];
@@ -46,16 +46,16 @@ const HomePage = () => {
         <About />
         <Services />
         <Portfolio />
+        <TrustedBy />
         <Testimonials />
-        <Blog />
         <Contact />
       </main>
     </>
   );
-};
+});
 
-// Layout component that conditionally renders Header and Footer
-const Layout = ({ children }: { children: React.ReactNode }) => {
+// Memoized Layout component that conditionally renders Header and Footer
+const Layout = memo(({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
 
@@ -66,7 +66,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       {isHomePage && <Footer />}
     </>
   );
-};
+});
 
 function App() {
   return (
