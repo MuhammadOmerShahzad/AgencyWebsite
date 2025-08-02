@@ -54,80 +54,83 @@ const TrustedBy = () => {
 
   // Custom Company Logo Icons
   const TechFlowLogo = () => (
-    <svg width="48" height="48" viewBox="0 0 32 32" fill="none" className="transition-colors duration-300">
-      {/* Circuit board pattern */}
-      <path d="M6 8H26M6 12H26M6 16H26M6 20H26" stroke="#3B82F6" strokeWidth="1" className="stroke-gray-500 group-hover:stroke-gray-900 dark:stroke-gray-400 dark:group-hover:stroke-white transition-colors duration-300"/>
-      <path d="M8 6V26M12 6V26M16 6V26M20 6V26M24 6V26" stroke="#1D4ED8" strokeWidth="1" className="stroke-gray-500 group-hover:stroke-gray-900 dark:stroke-gray-400 dark:group-hover:stroke-white transition-colors duration-300"/>
-      {/* Connection nodes */}
-      <circle cx="8" cy="8" r="1.5" fill="#1E40AF" className="fill-gray-500 group-hover:fill-gray-900 dark:fill-gray-400 dark:group-hover:fill-white transition-colors duration-300"/>
-      <circle cx="16" cy="12" r="1.5" fill="#1E40AF" className="fill-gray-500 group-hover:fill-gray-900 dark:fill-gray-400 dark:group-hover:fill-white transition-colors duration-300"/>
-      <circle cx="24" cy="20" r="1.5" fill="#1E40AF" className="fill-gray-500 group-hover:fill-gray-900 dark:fill-gray-400 dark:group-hover:fill-white transition-colors duration-300"/>
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" className="transition-colors duration-300">
+      {/* Tech flow arrows */}
+      <path d="M8 16L16 8L24 16L32 8L40 16" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
+      <path d="M8 24L16 16L24 24L32 16L40 24" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
+      <path d="M8 32L16 24L24 32L32 24L40 32" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
+      {/* Flow nodes */}
+      <circle cx="16" cy="8" r="3" fill="currentColor" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
+      <circle cx="32" cy="8" r="3" fill="currentColor" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
+      <circle cx="24" cy="24" r="3" fill="currentColor" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
     </svg>
   );
 
   const DataSyncLogo = () => (
-    <svg width="48" height="48" viewBox="0 0 32 32" fill="none" className="transition-colors duration-300">
-      {/* Database cylinders */}
-      <ellipse cx="12" cy="10" rx="3" ry="2" fill="#10B981" className="fill-gray-500 group-hover:fill-gray-900 dark:fill-gray-400 dark:group-hover:fill-white transition-colors duration-300"/>
-      <ellipse cx="12" cy="14" rx="3" ry="2" fill="#059669" className="fill-gray-500 group-hover:fill-gray-900 dark:fill-gray-400 dark:group-hover:fill-white transition-colors duration-300"/>
-      <ellipse cx="12" cy="18" rx="3" ry="2" fill="#047857" className="fill-gray-500 group-hover:fill-gray-900 dark:fill-gray-400 dark:group-hover:fill-white transition-colors duration-300"/>
-      <ellipse cx="12" cy="22" rx="3" ry="2" fill="#065F46" className="fill-gray-500 group-hover:fill-gray-900 dark:fill-gray-400 dark:group-hover:fill-white transition-colors duration-300"/>
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" className="transition-colors duration-300">
+      {/* Database icon */}
+      <ellipse cx="16" cy="12" rx="8" ry="4" stroke="currentColor" strokeWidth="2.5" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
+      <path d="M8 12V20C8 22.2 11.6 24 16 24C20.4 24 24 22.2 24 20V12" stroke="currentColor" strokeWidth="2.5" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
+      <path d="M8 20V28C8 30.2 11.6 32 16 32C20.4 32 24 30.2 24 28V20" stroke="currentColor" strokeWidth="2.5" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
       {/* Sync arrows */}
-      <path d="M20 8L24 12L20 16" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="stroke-gray-500 group-hover:stroke-gray-900 dark:stroke-gray-400 dark:group-hover:stroke-white transition-colors duration-300"/>
-      <path d="M24 16L20 20L16 16" stroke="#059669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="stroke-gray-500 group-hover:stroke-gray-900 dark:stroke-gray-400 dark:group-hover:stroke-white transition-colors duration-300"/>
+      <path d="M32 16L40 24L32 32" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
+      <path d="M40 32L32 24L40 16" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
+      <path d="M36 24H28" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
     </svg>
   );
 
   const CloudVaultLogo = () => (
-    <svg width="48" height="48" viewBox="0 0 32 32" fill="none" className="transition-colors duration-300">
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" className="transition-colors duration-300">
       {/* Cloud shape */}
-      <path d="M8 16C8 12 11 8 16 8C21 8 24 12 24 16" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round" className="stroke-gray-500 group-hover:stroke-gray-900 dark:stroke-gray-400 dark:group-hover:stroke-white transition-colors duration-300"/>
-      <path d="M8 16L12 20L20 20L24 16" stroke="#7C3AED" strokeWidth="2" strokeLinecap="round" className="stroke-gray-500 group-hover:stroke-gray-900 dark:stroke-gray-400 dark:group-hover:stroke-white transition-colors duration-300"/>
-      {/* Lock inside cloud */}
-      <rect x="13" y="14" width="6" height="4" rx="1" fill="#6D28D9" className="fill-gray-500 group-hover:fill-gray-900 dark:fill-gray-400 dark:group-hover:fill-white transition-colors duration-300"/>
-      <circle cx="16" cy="12" r="1" fill="#6D28D9" className="fill-gray-500 group-hover:fill-gray-900 dark:fill-gray-400 dark:group-hover:fill-white transition-colors duration-300"/>
+      <path d="M16 20C12 20 8 23 8 28C8 33 12 36 16 36H32C36 36 40 33 40 28C40 23 36 20 32 20C32 14 28 8 24 8C20 8 16 14 16 20Z" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
+      {/* Vault/Lock */}
+      <rect x="20" y="24" width="8" height="6" rx="1" stroke="currentColor" strokeWidth="2" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
+      <path d="M22 24V22C22 20.9 22.9 20 24 20C25.1 20 26 20.9 26 22V24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
+      <circle cx="24" cy="27" r="1" fill="currentColor" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
     </svg>
   );
 
   const SecureNetLogo = () => (
-    <svg width="48" height="48" viewBox="0 0 32 32" fill="none" className="transition-colors duration-300">
-      {/* Shield shape */}
-      <path d="M16 4L20 8L20 12C20 16 18 20 16 22C14 20 12 16 12 12L12 8L16 4Z" fill="#F59E0B" className="fill-gray-500 group-hover:fill-gray-900 dark:fill-gray-400 dark:group-hover:fill-white transition-colors duration-300"/>
-      {/* Network grid */}
-      <path d="M8 8L24 8M8 12L24 12M8 16L24 16M8 20L24 20" stroke="#D97706" strokeWidth="1" className="stroke-gray-500 group-hover:stroke-gray-900 dark:stroke-gray-400 dark:group-hover:stroke-white transition-colors duration-300"/>
-      <path d="M8 8V20M12 8V20M16 8V20M20 8V20M24 8V20" stroke="#B45309" strokeWidth="1" className="stroke-gray-500 group-hover:stroke-gray-900 dark:stroke-gray-400 dark:group-hover:stroke-white transition-colors duration-300"/>
-      {/* Security lock */}
-      <rect x="14" y="12" width="4" height="3" rx="0.5" fill="#B45309" className="fill-gray-500 group-hover:fill-gray-900 dark:fill-gray-400 dark:group-hover:fill-white transition-colors duration-300"/>
-      <circle cx="16" cy="10" r="0.8" fill="#B45309" className="fill-gray-500 group-hover:fill-gray-900 dark:fill-gray-400 dark:group-hover:fill-white transition-colors duration-300"/>
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" className="transition-colors duration-300">
+      {/* Shield */}
+      <path d="M24 4L32 8V18C32 26 28 34 24 36C20 34 16 26 16 18V8L24 4Z" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
+      {/* Network nodes */}
+      <circle cx="24" cy="16" r="2" fill="currentColor" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
+      <circle cx="20" cy="20" r="1.5" fill="currentColor" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
+      <circle cx="28" cy="20" r="1.5" fill="currentColor" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
+      <circle cx="24" cy="24" r="1.5" fill="currentColor" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
+      {/* Network connections */}
+      <path d="M24 16L20 20M24 16L28 20M20 20L24 24M28 20L24 24" stroke="currentColor" strokeWidth="1.5" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
     </svg>
   );
 
   const InnovateLabLogo = () => (
-    <svg width="48" height="48" viewBox="0 0 32 32" fill="none" className="transition-colors duration-300">
-      {/* Test tube */}
-      <path d="M12 8L12 20C12 22 14 24 16 24C18 24 20 22 20 20L20 8" stroke="#EC4899" strokeWidth="2" className="stroke-gray-500 group-hover:stroke-gray-900 dark:stroke-gray-400 dark:group-hover:stroke-white transition-colors duration-300"/>
-      {/* Bubbles */}
-      <circle cx="14" cy="12" r="1" fill="#DB2777" className="fill-gray-500 group-hover:fill-gray-900 dark:fill-gray-400 dark:group-hover:fill-white transition-colors duration-300"/>
-      <circle cx="18" cy="14" r="0.8" fill="#BE185D" className="fill-gray-500 group-hover:fill-gray-900 dark:fill-gray-400 dark:group-hover:fill-white transition-colors duration-300"/>
-      <circle cx="15" cy="16" r="0.6" fill="#BE185D" className="fill-gray-500 group-hover:fill-gray-900 dark:fill-gray-400 dark:group-hover:fill-white transition-colors duration-300"/>
-      {/* Innovation spark */}
-      <path d="M24 8L26 10L24 12M26 8L28 10L26 12" stroke="#EC4899" strokeWidth="1.5" strokeLinecap="round" className="stroke-gray-500 group-hover:stroke-gray-900 dark:stroke-gray-400 dark:group-hover:stroke-white transition-colors duration-300"/>
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" className="transition-colors duration-300">
+      {/* Light bulb */}
+      <path d="M24 8C28.4 8 32 11.6 32 16C32 18.4 30.8 20.6 29 22L29 28C29 30.2 27.2 32 25 32H23C20.8 32 19 30.2 19 28V22C17.2 20.6 16 18.4 16 16C16 11.6 19.6 8 24 8Z" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
+      {/* Filament */}
+      <path d="M21 16L27 16M22 20L26 20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
+      {/* Base */}
+      <path d="M20 32H28" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
+      <path d="M21 36H27" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
+      {/* Innovation rays */}
+      <path d="M24 4V6M36 16H38M24 38V40M10 16H12M32.5 9.5L31.1 10.9M32.5 34.5L31.1 33.1M15.5 9.5L16.9 10.9M15.5 34.5L16.9 33.1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
     </svg>
   );
 
   const QuantumCoreLogo = () => (
-    <svg width="48" height="48" viewBox="0 0 32 32" fill="none" className="transition-colors duration-300">
-      {/* Quantum atom */}
-      <circle cx="16" cy="16" r="8" stroke="#10B981" strokeWidth="2" fill="none" className="stroke-gray-500 group-hover:stroke-gray-900 dark:stroke-gray-400 dark:group-hover:stroke-white transition-colors duration-300"/>
-      <circle cx="16" cy="16" r="3" fill="#059669" className="fill-gray-500 group-hover:fill-gray-900 dark:fill-gray-400 dark:group-hover:fill-white transition-colors duration-300"/>
-      {/* Electron orbits */}
-      <ellipse cx="16" cy="16" rx="6" ry="2" stroke="#047857" strokeWidth="1" fill="none" className="stroke-gray-500 group-hover:stroke-gray-900 dark:stroke-gray-400 dark:group-hover:stroke-white transition-colors duration-300"/>
-      <ellipse cx="16" cy="16" rx="2" ry="6" stroke="#065F46" strokeWidth="1" fill="none" className="stroke-gray-500 group-hover:stroke-gray-900 dark:stroke-gray-400 dark:group-hover:stroke-white transition-colors duration-300"/>
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" className="transition-colors duration-300">
+      {/* Core */}
+      <circle cx="24" cy="24" r="4" fill="currentColor" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
+      {/* Quantum orbits */}
+      <circle cx="24" cy="24" r="12" stroke="currentColor" strokeWidth="2" fill="none" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
+      <ellipse cx="24" cy="24" rx="16" ry="8" stroke="currentColor" strokeWidth="2" fill="none" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
+      <ellipse cx="24" cy="24" rx="8" ry="16" stroke="currentColor" strokeWidth="2" fill="none" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
       {/* Quantum particles */}
-      <circle cx="22" cy="16" r="1" fill="#34D399" className="fill-gray-500 group-hover:fill-gray-900 dark:fill-gray-400 dark:group-hover:fill-white transition-colors duration-300"/>
-      <circle cx="16" cy="10" r="1" fill="#34D399" className="fill-gray-500 group-hover:fill-gray-900 dark:fill-gray-400 dark:group-hover:fill-white transition-colors duration-300"/>
-      <circle cx="10" cy="16" r="1" fill="#34D399" className="fill-gray-500 group-hover:fill-gray-900 dark:fill-gray-400 dark:group-hover:fill-white transition-colors duration-300"/>
-      <circle cx="16" cy="22" r="1" fill="#34D399" className="fill-gray-500 group-hover:fill-gray-900 dark:fill-gray-400 dark:group-hover:fill-white transition-colors duration-300"/>
+      <circle cx="36" cy="24" r="2" fill="currentColor" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
+      <circle cx="12" cy="24" r="2" fill="currentColor" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
+      <circle cx="24" cy="8" r="2" fill="currentColor" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
+      <circle cx="24" cy="40" r="2" fill="currentColor" className="text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white transition-colors duration-300"/>
     </svg>
   );
 
