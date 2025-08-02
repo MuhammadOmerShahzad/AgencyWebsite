@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
-import { Mail, Send, MessageSquare } from 'lucide-react';
+import { Mail, Send, MessageSquare, Video, ArrowRight } from 'lucide-react';
 
 // Memoized Contact Info Component
 const ContactInfo = React.memo(({ 
@@ -288,7 +288,57 @@ const Contact = () => {
           <ContactInfo
             contactInfo={contactInfo}
             isVisible={isVisible}
-          />
+                  />
+                </div>
+
+        {/* OR Separator */}
+        <div className={`my-8 sm:my-12 lg:my-16 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className="flex items-center justify-center">
+            <div className="flex items-center space-x-4 sm:space-x-6">
+              <div className="h-px bg-gray-300 dark:bg-gray-600 flex-1 w-16 sm:w-24 lg:w-32"></div>
+              <span className="text-sm sm:text-base lg:text-lg font-semibold text-gray-500 dark:text-gray-400 px-4 sm:px-6 py-2 bg-white dark:bg-gray-800 rounded-full border border-gray-200 dark:border-gray-700">
+                OR
+              </span>
+              <div className="h-px bg-gray-300 dark:bg-gray-600 flex-1 w-16 sm:w-24 lg:w-32"></div>
+            </div>
+          </div>
+              </div>
+
+        {/* Book a Call Section */}
+        <div className={`transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 overflow-hidden">
+            <div className="flex flex-col lg:flex-row">
+              {/* Left Side - Content */}
+              <div className="flex-1 p-6 sm:p-8 lg:p-10">
+                <div className="flex items-start space-x-4 mb-4">
+                  <div className="bg-gradient-to-r from-teal-500 to-cyan-500 rounded-xl p-3 flex-shrink-0">
+                    <Video className="h-6 w-6 text-white" />
+                    </div>
+                    <div className="flex-1">
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                      Book A Call With Us
+                    </h3>
+                    <p className="text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                      Schedule a free consultation to explore how we can streamline your business with tailored SaaS solutions and automation workflows.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Side - CTA Button */}
+              <div className="bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-gray-700 dark:to-gray-600 p-6 sm:p-8 lg:p-10 flex items-center justify-center">
+                <a
+                  href="https://calendly.com/omershahzad129/new-meeting?month=2025-08"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group bg-gradient-to-r from-teal-500 to-cyan-500 text-white px-8 py-4 rounded-xl font-semibold text-base lg:text-lg transition-all duration-200 hover:from-teal-600 hover:to-cyan-600 hover:scale-105 hover:-translate-y-1 flex items-center space-x-3 shadow-lg hover:shadow-xl touch-manipulation min-h-[48px]"
+                >
+                  <span>Book a call</span>
+                  <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

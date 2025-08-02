@@ -9,6 +9,7 @@ import TrustedBy from './components/TrustedBy';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+
 import { ThemeProvider } from './context/ThemeContext';
 import SEO from './components/SEO';
 import StructuredData, { OrganizationData, WebSiteData, ServiceData } from './components/StructuredData';
