@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Code2, Mail, Phone, MapPin, Github, Linkedin, Twitter } from 'lucide-react';
+import { Code2, Mail, Linkedin, Twitter } from 'lucide-react';
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -115,7 +115,7 @@ const Footer = () => {
         <div className="border-t border-gray-800 dark:border-gray-700 mt-8 sm:mt-12 pt-6 sm:pt-8">
           <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
             <p className="text-sm sm:text-base text-gray-400 dark:text-gray-500 text-center sm:text-left">
-              © 2024 CodByt. All rights reserved.
+              © 2025 CodByt. All rights reserved.
             </p>
             <div className="flex space-x-6 sm:space-x-8">
               <button

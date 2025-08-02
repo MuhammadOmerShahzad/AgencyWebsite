@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
-import { Mail, Phone, MapPin, Send, MessageSquare, Calendar } from 'lucide-react';
+import { Mail, Send, MessageSquare } from 'lucide-react';
 
 // Memoized Contact Info Component
 const ContactInfo = React.memo(({ 

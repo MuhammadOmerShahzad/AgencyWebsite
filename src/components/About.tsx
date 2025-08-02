@@ -96,8 +96,8 @@ const About = () => {
   useEffect(() => {
     const container = expertiseRef.current;
     if (!container) return;
-    let scrollAmount = 1;
-    let interval: any;
+    const scrollAmount = 1;
+    let interval: ReturnType<typeof setInterval>;
     function startScroll() {
       interval = setInterval(() => {
         if (paused || !container) return;
@@ -111,6 +111,8 @@ const About = () => {
     startScroll();
     return () => clearInterval(interval);
   }, [paused]);
+
+
 
   return (
     <section ref={sectionRef} id="about" className="py-16 sm:py-20 bg-gray-50 dark:bg-gray-900">

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
-import { ExternalLink, Github, ArrowRight } from 'lucide-react';
+
 
 // Memoized Project Card Component
 const ProjectCard = React.memo(({ 

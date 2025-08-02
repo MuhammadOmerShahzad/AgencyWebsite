@@ -9,11 +9,12 @@ interface FloatingIcon {
   top: number;
   left: number;
   size: number;
+  [key: string]: unknown;
 }
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -32,15 +33,7 @@ const Hero = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Optimized mouse/touch handling
-  useEffect(() => {
-    const handlePointerMove = (e: PointerEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    
-    window.addEventListener('pointermove', handlePointerMove);
-    return () => window.removeEventListener('pointermove', handlePointerMove);
-  }, []);
+
 
   const scrollToContact = useCallback(() => {
     const element = document.getElementById('contact');
@@ -83,7 +76,7 @@ const Hero = () => {
   }
 
   // Helper to check if a new icon/snippet is too close to existing ones
-  function isTooClose<T extends { [key: string]: any }>(top: number, left: number, arr: T[], typeKey: keyof T, typeValue: any) {
+  function isTooClose(top: number, left: number, arr: Array<{ top: number; left: number; [key: string]: unknown }>, typeKey: string, typeValue: unknown) {
     return arr.some(item => {
       const dist = Math.sqrt(Math.pow(item.top - top, 2) + Math.pow(item.left - left, 2));
       const sameType = item[typeKey] === typeValue;
@@ -180,7 +173,7 @@ const Hero = () => {
 
   // Typing animation for each snippet
   useEffect(() => {
-    typedSnippets.forEach((snippet, idx) => {
+    typedSnippets.forEach((snippet) => {
       if (snippet.shown.length < snippet.code.length) {
         const timeout = setTimeout(() => {
           setTypedSnippets(prev => prev.map(s =>

@@ -8,20 +8,11 @@ interface ClientLogo {
 
 const TrustedBy = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+
   const sectionRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
-  // Detect mobile device
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+
 
   // Optimized intersection observer
   useEffect(() => {
@@ -210,20 +201,20 @@ const TrustedBy = () => {
         {/* Main Content */}
         <div className={`mt-20 sm:mt-24 lg:mt-32 text-center transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h3 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 dark:text-white mb-6 sm:mb-8 lg:mb-10 max-w-4xl mx-auto leading-tight">
-            CodByt was built to move ideas from concept to launch—fast.
+            CodByt transforms businesses through innovative SaaS solutions and automation workflows.
           </h3>
           
           <div className="max-w-3xl mx-auto space-y-4 sm:space-y-6">
             <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
-              We help founders, creators, and teams build scalable{' '}
-              <span className="text-teal-600 dark:text-teal-400 font-semibold">membership sites</span>
+              We help businesses streamline operations with custom{' '}
+              <span className="text-teal-600 dark:text-teal-400 font-semibold">SaaS applications</span>
               {' '}and{' '}
-              <span className="text-teal-600 dark:text-teal-400 font-semibold">SaaS products</span>
-              {' '}without the usual delays, dev roadblocks, or messy handoffs.
+              <span className="text-teal-600 dark:text-teal-400 font-semibold">automation workflows</span>
+              {' '}that eliminate manual processes and boost productivity. From concept to deployment, we deliver scalable solutions that grow with your business.
             </p>
             
             <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
-              Whether you're launching a no-code MVP or a custom application, we turn your vision into a powerful, ready-to-grow platform—designed to scale with your business from day one.
+              Whether you need a complete SaaS platform, custom automation tools, or full-stack development services, our expertise in React, Node.js, and modern technologies ensures your vision becomes a powerful, production-ready solution.
             </p>
           </div>
         </div>

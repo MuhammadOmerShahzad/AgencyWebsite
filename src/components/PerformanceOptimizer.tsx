@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
+import { useEffect } from 'react';
 
 const PerformanceOptimizer = () => {
   useEffect(() => {
